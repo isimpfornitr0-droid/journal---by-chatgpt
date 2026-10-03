@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Trade Setup Tracker · Journal 4</title>
+<!-- A self-contained journal. No external requests or third-party scripts. -->
+<style>:root{--bg:#f4f5f1;--card:#fff;--panel:#fafbf8;--ink:#26352e;--muted:#6d796f;--line:#e0e6dc;--green:#416954;--green-bg:#e9f2e9;--red:#ae5753;--red-bg:#fbefed;--amber:#886823;--amber-bg:#f8f2df;--shadow:0 8px 40px #26352e0b;--radius:14px;--sidebar:226px;color-scheme:light}
+[data-theme=dark]{--bg:#171e1b;--card:#212a25;--panel:#1b231e;--ink:#e0e8e1;--muted:#a1b0a5;--line:#35433a;--green:#95c2a6;--green-bg:#2e4636;--red:#eda5a1;--red-bg:#432f2e;--amber:#e0c179;--amber-bg:#3c3627;--shadow:none;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:wait;opacity:.55}a{color:var(--green)}button,input,select,textarea{outline-offset:3px}button:focus-visible,a:focus-visible{outline:2px solid var(--green)}input:focus,textarea:focus,select:focus,[contenteditable]:focus{outline:2px solid var(--green);outline-offset:1px}h1,h2,h3,h4,p{margin:0}h1{font-size:30px;font-weight:600;letter-spacing:-1px}h2{font-size:23px;letter-spacing:-.5px;font-weight:600}h3{font-size:16px;font-weight:600}h4{font-size:14px}p+p{margin-top:12px}small{font-size:11px}button svg{pointer-events:none}.mono,.number{font-family:ui-monospace,'Cascadia Code',Consolas,monospace;font-variant-numeric:tabular-nums}.positive{color:var(--green)}.negative{color:var(--red)}.muted{color:var(--muted)}.eyebrow,.nav-label{font-size:10px;font-weight:700;letter-spacing:1.8px;color:var(--muted)}.eyebrow{display:block;margin-bottom:6px}.skip-link{position:fixed;top:-60px;z-index:500;background:var(--card);padding:12px}.skip-link:focus{top:0}.sidebar{width:var(--sidebar);position:fixed;inset:0 auto 0 0;background:var(--card);border-right:1px solid var(--line);padding:30px 19px;display:flex;flex-direction:column;z-index:20}.brand{display:flex;align-items:center;gap:11px;font-size:17px;font-weight:650;letter-spacing:-.5px;margin:0 7px 45px}.brand>div>span{display:block;font-size:8px;color:var(--muted);letter-spacing:1.5px;margin-top:3px}.brand-mark{width:39px;height:40px;background:#365b45;color:white;border-radius:11px;font:700 21px/40px Georgia;text-align:center}.brand-mark span{font:14px sans-serif}.nav-label{margin:0 12px 15px}.sidebar nav{display:grid;gap:6px}.sidebar button{border:0;display:flex;align-items:center;text-align:left;gap:13px;padding:12px 14px;background:transparent;color:var(--muted);width:100%;border-radius:8px;font-size:13px;font-weight:550}.sidebar button span{font-size:19px;line-height:1;width:18px;text-align:center}.sidebar button.active{background:var(--green-bg);color:var(--green)}.sidebar button:hover{background:var(--bg);color:var(--ink)}.sidebar-bottom{margin-top:auto;padding-top:30px}.save-dot{font-size:11px;margin:23px 12px 8px;color:var(--muted)}.save-dot:before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;display:inline-block;margin-right:7px}.sidebar-bottom>small{font-size:9px;letter-spacing:1.1px;color:var(--muted);margin:0 12px}.workspace{margin-left:var(--sidebar)}.topbar{padding:30px 38px 22px;display:flex;justify-content:space-between;align-items:center;gap:15px}.top-actions,.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.btn{padding:9px 14px;border-radius:8px;background:var(--card);color:var(--ink);border:1px solid var(--line);font-size:12px;font-weight:600;white-space:nowrap}.btn:hover{border-color:var(--green);background:var(--green-bg)}.btn.primary{background:#365e48;color:#fff;border-color:#365e48}.btn.primary:hover{background:#284b36}.btn.danger{color:var(--red)}.btn.quiet{background:transparent}.btn.small{font-size:11px;padding:5px 9px}.icon-button{border:0;background:transparent;color:var(--muted);font-size:25px;padding:0 8px}.icon-button:hover{color:var(--ink)}main{padding:0 38px 35px;max-width:1680px;margin:auto;outline:none}.app-footer{border-top:1px solid var(--line);padding:16px 38px;display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:10px;letter-spacing:.2px}.toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;flex-wrap:wrap;margin-bottom:22px}.filters{display:flex;gap:10px;align-items:end;flex-wrap:wrap}.filters .field{min-width:130px;margin:0}.filters .field input,.filters .field select{font-size:12px;padding:8px 10px}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field>span,.field>label{font-size:11px;font-weight:600;color:var(--muted)}.field input,.field select,.field textarea{width:100%;min-width:0;border:1px solid var(--line);border-radius:7px;padding:10px 11px;background:var(--card);color:var(--ink)}.field textarea{min-height:94px;resize:vertical;line-height:1.6}.field .hint,.hint{font-size:11px;color:var(--muted);font-weight:400;line-height:1.55}.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.stat{padding:20px 22px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}.stat.primary-stat{background:#365b45;border-color:#365b45;color:#fff}.stat.primary-stat .stat-label,.stat.primary-stat .stat-caption{color:#cee0d2}.stat.primary-stat .positive,.stat.primary-stat .negative{color:white}.stat-label{font-size:10px;font-weight:650;letter-spacing:1.1px;color:var(--muted);text-transform:uppercase}.stat-value{font-size:29px;line-height:1.35;margin:10px 0 7px;letter-spacing:-1.1px;white-space:nowrap}.stat-caption{font-size:11px;color:var(--muted);min-height:17px}.grid-2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);gap:20px}.equal{grid-template-columns:repeat(2,minmax(0,1fr))}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:23px;margin-bottom:20px;min-width:0;box-shadow:var(--shadow)}.card-head{display:flex;justify-content:space-between;align-items:start;gap:15px;margin-bottom:20px}.card-head p,.subtext{font-size:12px;color:var(--muted);margin-top:5px}.chip{font-size:10px;font-weight:600;letter-spacing:.3px;border:1px solid var(--line);border-radius:5px;padding:3px 7px;display:inline-block;white-space:nowrap;color:var(--muted);background:var(--panel)}.chip.good{background:var(--green-bg);color:var(--green);border-color:transparent}.chip.bad{background:var(--red-bg);color:var(--red);border-color:transparent}.chip.warn{background:var(--amber-bg);color:var(--amber);border-color:transparent}.metric-list{display:grid;gap:0}.metric-row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.metric-row:last-child{border-bottom:0}.metric-row>span:first-child{color:var(--muted)}.metric-row .number{font-weight:650}.callout{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:13px 16px;font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.65}.callout strong{color:var(--ink)}.callout.warn{background:var(--amber-bg);border-color:transparent;color:var(--amber)}.callout.good{background:var(--green-bg);border-color:transparent;color:var(--green)}.callout.error{background:var(--red-bg);color:var(--red)}.table-wrap{overflow:auto;width:100%;border-radius:8px}table{width:100%;border-collapse:collapse;font-size:12px;text-align:left;white-space:nowrap}th{color:var(--muted);font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:600;padding:12px 10px;background:var(--panel);border-bottom:1px solid var(--line)}td{padding:13px 10px;border-bottom:1px solid var(--line)}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:var(--panel)}td.wrap{white-space:normal;min-width:150px;max-width:320px}td .subtext{font-size:10px;margin-top:2px}.table-link{border:0;background:transparent;color:var(--ink);font-weight:600;padding:0;text-align:left}.table-link:hover{text-decoration:underline}.empty{padding:48px 20px;text-align:center;color:var(--muted);font-size:13px}.empty .empty-icon{font-size:29px;color:var(--green);margin-bottom:14px}.empty h3{color:var(--ink);margin-bottom:7px}.empty p{max-width:410px;margin:0 auto 17px;font-size:12px}.chart{width:100%;height:236px;display:block}.chart-grid{stroke:var(--line);stroke-width:1}.chart-label{fill:var(--muted);font:10px ui-monospace,monospace}.chart-line{fill:none;stroke:var(--green);stroke-width:2.5}.chart-area{fill:var(--green);opacity:.07}.chart-zero{stroke:var(--muted);stroke-dasharray:3 4;opacity:.5}.segmented{display:flex;gap:3px;border-radius:7px;background:var(--bg);padding:3px}.segmented button{border:0;border-radius:5px;padding:5px 10px;background:transparent;font-size:11px;color:var(--muted)}.segmented button.active{background:var(--card);box-shadow:0 1px 3px #0001;color:var(--ink)}.bar-track{height:6px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:8px}.bar-track>span{display:block;height:100%;background:var(--green);border-radius:4px}.coverage-item{margin:15px 0}.coverage-item .row{justify-content:space-between;font-size:11px}.section-gap{margin-top:24px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.form-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.form-grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}.full{grid-column:1/-1}dialog{width:min(940px,calc(100vw - 32px));max-height:92vh;border:1px solid var(--line);border-radius:17px;background:var(--card);color:var(--ink);padding:0;box-shadow:0 30px 120px #0004}dialog::backdrop{background:#14261db5;backdrop-filter:blur(3px)}.dialog-head{padding:22px 27px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px;position:sticky;top:0;background:var(--card);z-index:4}.dialog-body,.tab-panel{padding:24px 27px}.dialog-foot{padding:18px 27px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:center;background:var(--card);position:sticky;bottom:0;z-index:4;font-size:12px}.dialog-foot>[role=status]{max-width:55%;color:var(--red)}.form-tabs{display:flex;border-bottom:1px solid var(--line);padding:0 27px;gap:23px;background:var(--panel)}.form-tabs button{padding:14px 0;background:transparent;color:var(--muted);border:0;border-bottom:2px solid transparent;font-size:12px}.form-tabs button.active{border-bottom-color:var(--green);color:var(--green);font-weight:650}.tab-panel[hidden]{display:none}.form-section{font-size:10px;font-weight:700;letter-spacing:1.2px;margin:27px 0 15px;padding-bottom:9px;border-bottom:1px solid var(--line);text-transform:uppercase;color:var(--muted)}details{margin-top:18px;border:1px solid var(--line);border-radius:9px;padding:12px 15px}summary{cursor:pointer;font-size:12px;font-weight:600}details>div{margin-top:17px}.gate-row{display:grid;grid-template-columns:1fr 150px;gap:15px;align-items:center;font-size:12px;padding:9px 0;border-bottom:1px solid var(--line)}.gate-row select{padding:7px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:5px;font-size:11px}.context-card{padding:15px;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:13px 0}.context-card .row{justify-content:space-between;margin-bottom:13px}.fill-row{display:grid;grid-template-columns:95px 1fr 1.5fr 30px;gap:10px;margin:9px 0;align-items:end}.fill-row .field input{font-size:12px;padding:8px}.fill-row .icon-button{padding-bottom:6px}.images-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.image-card{border:1px solid var(--line);border-radius:8px;overflow:hidden}.image-card img{width:100%;height:120px;object-fit:cover;cursor:zoom-in;display:block}.image-card .row{padding:8px}.image-card select{width:75%;font-size:11px;background:var(--card);color:var(--ink);border:1px solid var(--line);padding:4px;border-radius:4px}.dropzone{border:1px dashed var(--muted);border-radius:9px;padding:18px;text-align:center;font-size:12px;color:var(--muted);margin:12px 0}.prewrap{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.8}.detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:22px 0}.detail-grid .label{font-size:10px;color:var(--muted);margin-bottom:5px}.detail-grid .value{font-size:13px;overflow-wrap:anywhere}.playbook-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.playbook-grid .card{margin:0}.playbook-grid h3{margin:11px 0;font-size:15px}.playbook-grid p,.playbook-grid li{font-size:12px;color:var(--muted);line-height:1.8}.playbook-grid ul{padding-left:18px;margin:10px 0}.calendar-layout{display:grid;grid-template-columns:320px minmax(0,1fr);gap:20px}.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.calendar .weekday{text-align:center;font-size:9px;color:var(--muted);padding:8px 0}.calendar button{height:66px;border:1px solid transparent;border-radius:7px;padding:5px 1px;background:var(--panel);color:var(--ink);font-size:11px;position:relative;text-align:center;display:flex;flex-direction:column;align-items:center}.calendar button.today{border-color:var(--line);font-weight:700}.calendar button.selected{border-color:var(--green);background:var(--green-bg)}.calendar .day-r{font-size:8px;margin:3px 0}.calendar .day-n{font-size:7px;color:var(--muted)}.calendar .note-dot{position:absolute;right:4px;top:4px;width:4px;height:4px;border-radius:50%;background:var(--green)}.note-editor{min-height:330px;padding:16px;border:1px solid var(--line);border-radius:8px;font-size:14px;line-height:1.9;overflow-wrap:anywhere}.note-editor:empty:before{content:attr(data-placeholder);color:var(--muted);pointer-events:none}.note-editor img{max-width:100%;height:auto;border-radius:6px}.week-note{min-height:120px!important}.pills{display:flex;flex-wrap:wrap;gap:7px}.pills button{border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:11px;padding:6px 10px;border-radius:5px}.pills button.active{border-color:var(--green);background:var(--green-bg);color:var(--green)}.divider{height:1px;background:var(--line);margin:23px 0}.loading{padding:50px;color:var(--muted)}#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:300;background:var(--ink);color:var(--card);padding:13px 22px;border-radius:10px;box-shadow:var(--shadow);font-size:12px;max-width:90vw;display:none}#toast.visible{display:block}#lightbox{width:min(1400px,96vw);background:var(--card);padding:24px;overflow:auto}#lightbox>button{position:absolute;right:3px;top:1px;background:var(--card)}#lightbox img{max-width:100%;display:block;margin:auto}.snapshot-row{padding:14px 0;border-bottom:1px solid var(--line);display:flex;gap:14px;justify-content:space-between;align-items:center;font-size:12px}.data-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.data-actions .card p{font-size:12px;color:var(--muted);margin:10px 0 18px}.nowrap{white-space:nowrap}.scroll-box{max-height:390px;overflow:auto}.revision{padding:10px 0;border-bottom:1px solid var(--line);font-size:12px}.hidden{display:none!important}
+@media(min-width:1500px){.stats-grid{gap:18px}.stat{padding:25px}.stat-value{font-size:34px}.topbar,main{padding-left:50px;padding-right:50px}}
+@media(max-width:1150px){:root{--sidebar:195px}.sidebar{padding:25px 12px}.brand{font-size:15px}.brand>div>span{font-size:7px}.topbar{padding:25px 24px 20px}main{padding:0 24px 30px}.stat{padding:16px}.stat-value{font-size:24px}.grid-2{grid-template-columns:1fr}.grid-2.equal{grid-template-columns:1fr 1fr}.calendar-layout{grid-template-columns:280px minmax(0,1fr)}.data-actions{grid-template-columns:1fr}.playbook-grid{grid-template-columns:1fr}}
+@media(max-width:800px){:root{--sidebar:0px}.sidebar{position:static;width:100%;padding:15px 18px 0;border-right:0;border-bottom:1px solid var(--line)}.brand{margin:0 0 15px;font-size:17px}.brand>div>span{font-size:8px}.brand-mark{width:33px;height:34px;line-height:34px}.nav-label,.sidebar-bottom{display:none}.sidebar nav{display:flex;overflow-x:auto;gap:6px;margin:0 -18px;padding:0 18px 12px}.sidebar button{padding:8px 11px;font-size:11px;flex-shrink:0;width:auto;gap:6px}.sidebar button span{font-size:15px}.workspace{margin:0}.topbar{padding:22px 18px 17px}.topbar h1{font-size:25px}.eyebrow{font-size:8px}.top-actions{gap:5px}.top-actions .btn{padding:8px 10px;font-size:11px}main{padding:0 18px 25px}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{padding:16px}.stat-value{font-size:25px}.grid-2.equal{grid-template-columns:1fr}.calendar-layout{grid-template-columns:1fr}.calendar-layout .calendar{gap:6px}.calendar button{height:72px}.calendar .day-r{font-size:10px}.calendar .day-n{font-size:9px}.app-footer{padding:16px 18px}.app-footer span:first-child{display:none}.card{padding:18px}.form-grid.three,.form-grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dialog-body,.tab-panel{padding:20px}.dialog-head,.dialog-foot{padding:17px 20px}.form-tabs{padding:0 20px;gap:18px}.form-tabs button{font-size:11px}.images-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar .filters{width:100%}.filters .field{min-width:calc(50% - 5px);flex:1}.fill-row{grid-template-columns:60px 1fr 1.35fr 20px;gap:7px}.fill-row input{padding:6px!important;font-size:11px!important}.gate-row{grid-template-columns:1fr 120px}.data-nav-mobile{display:block!important}}
+@media(min-width:801px){.data-nav-mobile{display:none!important}}
+@media(max-width:420px){.form-grid,.form-grid.three,.form-grid.four{grid-template-columns:1fr}.topbar{align-items:flex-start}.top-actions{max-width:164px;justify-content:flex-end}.stat-value{font-size:23px}.stat-caption{font-size:10px}.form-tabs{gap:13px}.dialog-foot{align-items:flex-start;flex-direction:column}.dialog-foot>[role=status]{max-width:100%}.fill-row{grid-template-columns:55px 1fr 25px}.fill-row .field:nth-child(3){grid-column:1/3;grid-row:2}.fill-row .icon-button{grid-column:3;grid-row:1/3}.detail-grid{gap:14px}.brand{margin-bottom:10px}}
+@media print{.sidebar,.top-actions,.toolbar,.app-footer,.btn{display:none!important}.workspace{margin:0}main{padding:0}.card,.stat{box-shadow:none;break-inside:avoid}.topbar{padding:10px 0}.stats-grid{grid-template-columns:repeat(4,1fr)}body{background:white;color:black}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to journal</a>
+<aside class="sidebar">
+  <div class="brand"><span class="brand-mark">ts<span>↗</span></span><div>Trade Setup<span>THE TRADING JOURNAL</span></div></div>
+  <div class="nav-label">WORKSPACE</div>
+  <nav aria-label="Main navigation" id="nav">
+    <button data-page="dashboard" class="active"><span>◫</span> Overview</button>
+    <button data-page="trades"><span>≡</span> Trade log</button>
+    <button data-page="opportunities"><span>◇</span> Skipped setups</button>
+    <button data-page="analytics"><span>⌁</span> Research</button>
+    <button data-page="weekly"><span>▤</span> Weekly review</button>
+    <button data-page="journal"><span>▦</span> Daily journal</button>
+    <button data-page="playbook"><span>▧</span> Playbook</button>
+  </nav>
+  <div class="sidebar-bottom"><button data-page="data"><span>↳</span> Data & settings</button><div class="save-dot" id="save-status" role="status">Opening journal…</div><small>JOURNAL 4.0 · LOCAL FIRST</small></div>
+</aside>
+<div class="workspace">
+  <header class="topbar"><div><span class="eyebrow" id="page-eyebrow">YOUR PROCESS, IN FOCUS</span><h1 id="page-title">Overview</h1></div><div class="top-actions"><button class="btn quiet" id="theme-button" aria-label="Toggle dark theme">◐</button><button class="btn" id="backup-button">↓ Backup</button><button class="btn primary" id="new-trade">+ Log trade</button></div></header>
+  <main id="main" tabindex="-1"><div class="loading">Opening your journal…</div></main>
+  <footer class="app-footer"><span>Observe the setup. Measure the process.</span><span id="footer-count">ES · NQ · MES · MNQ</span></footer>
+</div>
+<dialog id="editor" aria-labelledby="editor-title"><form id="trade-form" novalidate><div class="dialog-head"><div><span class="eyebrow">TRADE WORKSPACE</span><h2 id="editor-title">Log a trade</h2></div><button class="icon-button" type="button" data-close="editor" aria-label="Close trade editor">×</button></div><div id="trade-editor-body"></div><div class="dialog-foot"><span id="form-feedback" role="status"></span><div class="row"><button class="btn" type="button" data-close="editor">Cancel</button><button class="btn primary" type="submit" id="save-trade">Save trade</button></div></div></form></dialog>
+<dialog id="detail" aria-labelledby="detail-title"><div class="dialog-head"><h2 id="detail-title">Trade detail</h2><button class="icon-button" data-close="detail" aria-label="Close details">×</button></div><div class="dialog-body" id="detail-body"></div></dialog>
+<dialog id="ghost-editor" aria-labelledby="ghost-title"><form id="ghost-form"><div class="dialog-head"><h2 id="ghost-title">Skipped setup</h2><button class="icon-button" type="button" data-close="ghost-editor" aria-label="Close skipped setup">×</button></div><div class="dialog-body" id="ghost-body"></div><div class="dialog-foot"><span id="ghost-feedback" role="status"></span><div class="row"><button class="btn" type="button" data-close="ghost-editor">Cancel</button><button class="btn primary" type="submit">Save setup</button></div></div></form></dialog>
+<dialog id="import-dialog" aria-labelledby="import-title"><div class="dialog-head"><h2 id="import-title">Review import</h2><button class="icon-button" data-close="import-dialog" aria-label="Close import">×</button></div><div class="dialog-body" id="import-body"></div></dialog>
+<dialog id="lightbox" aria-label="Chart screenshot"><button class="icon-button" data-close="lightbox" aria-label="Close screenshot">×</button><img id="lightbox-image" alt="Trade chart screenshot"></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<input id="json-file" type="file" accept=".json,application/json" hidden>
+<input id="csv-file" type="file" accept=".csv,text/csv" hidden>
+<noscript>This journal needs JavaScript enabled. Your backup files remain separate from this HTML.</noscript>
+<script>const SETUPS = [
+  // ========== BULLISH ==========
+  { id:"BUL-1", name:"Positive 0DTE Call Cross", phase:"bullish", system:"sma",
+    desc:"10 SMA crosses above 50 SMA on 5m 0DTE calls. Enter long. 50 SMA must be turned upward or sideways — do NOT enter if 50 is turned down. No Fib involvement.",
+    wr:60, rr:1.33, timeframe:"5m",
+    confluences:[
+      {text:"50 SMA turned up or sideways",type:"boost"},
+      {text:"Cumulative TICK slope agrees (rising)",type:"boost"},
+      {text:"50 SMA still turned down → no entry",type:"warning"},
+      {text:"Cross near a Fib resistance → 67% break likely",type:""}
+    ],
+    stop:"5m candle close below 50 SMA." },
+
+  { id:"BUL-2", name:"Negative 0DTE Put Cross", phase:"bullish", system:"sma",
+    desc:"0DTE put premium goes negative — 10 SMA crosses below 50 SMA on puts. This is bullish (weakness in puts = strength in market). Take long via calls. No Fib involvement.",
+    wr:60, rr:1.33, timeframe:"5m",
+    confluences:[
+      {text:"Put 50 SMA turning down confirms put weakness",type:"boost"},
+      {text:"Weekly trend supports long bias",type:"boost"},
+      {text:"Both sides negative → neutral phase instead",type:"warning"}
+    ],
+    stop:"5m candle close below 50 SMA on calls." },
+
+  { id:"BUL-3", name:"0DTE 50SMA Bounce (Calls Crossed)", phase:"bullish", system:"sma",
+    desc:"0DTE calls already crossed positive. Price pulls back and tests the 50 SMA on 5m chart, then bounces. Buy the bounce. No Fib at this level.",
+    wr:60, rr:1.33, timeframe:"5m",
+    confluences:[
+      {text:"0DTE calls already positively crossed",type:"boost"},
+      {text:"Volume increasing on bounce candle",type:"boost"},
+      {text:"Price at 50SMA on Friday 30m → skip this bounce",type:"warning"}
+    ],
+    stop:"5m candle close below 50 SMA." },
+
+  { id:"BUL-4", name:"0DTE 50SMA Bounce + Fib Level", phase:"bullish", system:"confluence",
+    desc:"0DTE calls already crossed positive. Price pulls back to the 50 SMA on 5m AND a Fib level lines up at the same zone. Double support — high conviction. Use 50SMA stop to avoid wick-outs.",
+    wr:65, rr:2.0, timeframe:"5m + 30m",
+    confluences:[
+      {text:"Fib + 0DTE 50SMA aligned = double S/R",type:"boost"},
+      {text:"Use 50SMA stop instead of fixed Fib stop",type:"boost"},
+      {text:"0DTE calls already positively crossed",type:"boost"}
+    ],
+    stop:"5m close below 50 SMA (preferred over 11pt/60pt Fib stop — avoids wick-outs)." },
+
+  { id:"BUL-5", name:"Weekly 50SMA Bounce + Fib Level", phase:"bullish", system:"confluence",
+    desc:"Weekly calls already crossed positive. Price pulls back to the 50 SMA on 30m weekly calls AND a Fib level is nearby. Enter long on the bounce. Best when not extended on weekly TF.",
+    wr:58, rr:1.8, timeframe:"30m",
+    confluences:[
+      {text:"Fib level aligns with weekly 50SMA",type:"boost"},
+      {text:"Weekly calls positively crossed",type:"boost"},
+      {text:"Choppy month → lower reliability",type:"warning"},
+      {text:"Extended on weekly TF without Fib → risky",type:"warning"}
+    ],
+    stop:"30m candle close below 50 SMA." },
+
+  { id:"BUL-6", name:"Fib Level Bounce (Standalone)", phase:"bullish", system:"fib",
+    desc:"Weekly trend is bullish. Price pulls back into a Fib level on 30m chart. Enter long at the Fib purely on structure — no active 0DTE signal at this level. The 0DTE may be crossed somewhere but isn't interacting with the Fib.",
+    wr:46, rr:2.5, timeframe:"30m",
+    confluences:[
+      {text:"Weekly trend supports direction",type:"boost"},
+      {text:"5m premium used as trailing stop",type:""},
+      {text:"0DTE cross pushing into Fib → 67% break risk",type:"warning"},
+      {text:"No 0DTE 50SMA support at this level",type:""}
+    ],
+    stop:"ES: 11pts below Fib | NQ: 60pts below Fib." },
+
+  { id:"BUL-OPEN", name:"Open Bullish (Discretionary / Logic-Based)", phase:"bullish", system:"open", open:true,
+    desc:"Freeform long taken on your own read of the market when no predefined bullish setup fits cleanly. Use this to log trades you took purely on logic. Write your full thesis in the comment and attach charts so you can review the discretionary calls separately from your systematic ones.",
+    wr:0, rr:0, timeframe:"any",
+    confluences:[
+      {text:"State your bullish thesis before entry",type:"boost"},
+      {text:"Define stop & target up front",type:"boost"},
+      {text:"No mechanical signal — review these honestly",type:"warning"}
+    ],
+    stop:"Discretionary — define before entry and note it in the comment." },
+
+  // ========== BEARISH ==========
+  { id:"BER-1", name:"Positive 0DTE Put Cross", phase:"bearish", system:"sma",
+    desc:"10 SMA crosses above 50 SMA on 5m 0DTE puts. Enter short. 50 SMA must be turned upward or sideways on puts — do NOT enter if 50 is turned down. No Fib involvement.",
+    wr:60, rr:1.33, timeframe:"5m",
+    confluences:[
+      {text:"50 SMA turned up or sideways on puts",type:"boost"},
+      {text:"Cumulative TICK slope agrees (falling)",type:"boost"},
+      {text:"50 SMA still turned down on puts → no entry",type:"warning"},
+      {text:"Cross near a Fib support → 67% break likely",type:""}
+    ],
+    stop:"5m candle close below 50 SMA on puts." },
+
+  { id:"BER-2", name:"Negative 0DTE Call Cross", phase:"bearish", system:"sma",
+    desc:"0DTE call premium goes negative — 10 SMA crosses below 50 SMA on calls. This is bearish (weakness in calls = weakness in market). Take short via puts. No Fib involvement.",
+    wr:60, rr:1.33, timeframe:"5m",
+    confluences:[
+      {text:"Call 50 SMA turning down confirms call weakness",type:"boost"},
+      {text:"Weekly trend supports short bias",type:"boost"},
+      {text:"Both sides negative → neutral phase instead",type:"warning"}
+    ],
+    stop:"5m candle close below 50 SMA on puts." },
+
+  { id:"BER-3", name:"0DTE 50SMA Bounce (Puts Crossed)", phase:"bearish", system:"sma",
+    desc:"0DTE puts already crossed positive. Price pulls back up and tests the 50 SMA on 5m chart, then rejects. Short the rejection. No Fib at this level.",
+    wr:60, rr:1.33, timeframe:"5m",
+    confluences:[
+      {text:"0DTE puts already positively crossed",type:"boost"},
+      {text:"Volume increasing on rejection candle",type:"boost"},
+      {text:"Price at 50SMA on Friday 30m → skip this bounce",type:"warning"}
+    ],
+    stop:"5m candle close above 50 SMA on puts." },
+
+  { id:"BER-4", name:"0DTE 50SMA Bounce + Fib Level", phase:"bearish", system:"confluence",
+    desc:"0DTE puts already crossed positive. Price pulls back up to the 50 SMA on 5m AND a Fib level lines up at the same zone. Double resistance — high conviction. Use 50SMA stop to avoid wick-outs.",
+    wr:65, rr:2.0, timeframe:"5m + 30m",
+    confluences:[
+      {text:"Fib + 0DTE 50SMA aligned = double S/R",type:"boost"},
+      {text:"Use 50SMA stop instead of fixed Fib stop",type:"boost"},
+      {text:"0DTE puts already positively crossed",type:"boost"}
+    ],
+    stop:"5m close above 50 SMA on puts (preferred over 11pt/60pt Fib stop)." },
+
+  { id:"BER-5", name:"Weekly 50SMA Bounce + Fib Level", phase:"bearish", system:"confluence",
+    desc:"Weekly puts already crossed positive. Price pulls back up to the 50 SMA on 30m weekly puts AND a Fib level is nearby. Short the rejection. Best when not extended on weekly TF.",
+    wr:58, rr:1.8, timeframe:"30m",
+    confluences:[
+      {text:"Fib level aligns with weekly 50SMA",type:"boost"},
+      {text:"Weekly puts positively crossed",type:"boost"},
+      {text:"Choppy month → lower reliability",type:"warning"},
+      {text:"Extended on weekly TF without Fib → risky",type:"warning"}
+    ],
+    stop:"30m candle close above 50 SMA on puts." },
+
+  { id:"BER-6", name:"Fib Level Bounce (Standalone)", phase:"bearish", system:"fib",
+    desc:"Weekly trend is bearish. Price pulls back up into a Fib level on 30m chart. Enter short at the Fib purely on structure — no active 0DTE signal at this level.",
+    wr:46, rr:2.5, timeframe:"30m",
+    confluences:[
+      {text:"Weekly trend supports direction",type:"boost"},
+      {text:"5m premium used as trailing stop",type:""},
+      {text:"0DTE cross pushing into Fib → 67% break risk",type:"warning"},
+      {text:"No 0DTE 50SMA resistance at this level",type:""}
+    ],
+    stop:"ES: 11pts above Fib | NQ: 60pts above Fib." },
+
+  { id:"BER-OPEN", name:"Open Bearish (Discretionary / Logic-Based)", phase:"bearish", system:"open", open:true,
+    desc:"Freeform short taken on your own read of the market when no predefined bearish setup fits cleanly. Use this to log trades you took purely on logic. Write your full thesis in the comment and attach charts so you can review the discretionary calls separately from your systematic ones.",
+    wr:0, rr:0, timeframe:"any",
+    confluences:[
+      {text:"State your bearish thesis before entry",type:"boost"},
+      {text:"Define stop & target up front",type:"boost"},
+      {text:"No mechanical signal — review these honestly",type:"warning"}
+    ],
+    stop:"Discretionary — define before entry and note it in the comment." },
+
+  // ========== NEUTRAL ==========
+  { id:"NEU-1", name:"Short Fib at Top of Neutral Range", phase:"neutral", system:"fib",
+    desc:"Market is neutral (30m premium crossed back, trend didn't develop). Short the Fib level at the top of the neutral range as a reaction zone.",
+    wr:46, rr:2.5, timeframe:"30m",
+    confluences:[
+      {text:"Both Friday premiums negative confirms neutral",type:"boost"},
+      {text:"0DTE cross pushing into top Fib → 67% break risk",type:"warning"},
+      {text:"No HTF level supporting Fib → weaker hold",type:"warning"}
+    ],
+    stop:"ES: 11pts above Fib | NQ: 60pts above Fib." },
+
+  { id:"NEU-2", name:"Long Fib at Bottom of Neutral Range", phase:"neutral", system:"fib",
+    desc:"Market is neutral. Long the Fib level at the bottom of the neutral range as a reaction zone.",
+    wr:46, rr:2.5, timeframe:"30m",
+    confluences:[
+      {text:"Both Friday premiums negative confirms neutral",type:"boost"},
+      {text:"0DTE cross pushing into bottom Fib → 67% break risk",type:"warning"},
+      {text:"No HTF level supporting Fib → weaker hold",type:"warning"}
+    ],
+    stop:"ES: 11pts below Fib | NQ: 60pts below Fib." },
+
+  { id:"NEU-3", name:"Neutral Fib + 50SMA Double S/R (Top)", phase:"neutral", system:"confluence",
+    desc:"Neutral range — both contracts negative. At the top of the range, the Fib lines up with the 0DTE calls testing their 50 SMA. Double resistance: structural Fib + micro 50SMA. High conviction short.",
+    wr:65, rr:2.0, timeframe:"5m + 30m",
+    confluences:[
+      {text:"Top Fib + call 50SMA = double resistance",type:"boost"},
+      {text:"Both contracts negative confirms neutral",type:"boost"},
+      {text:"Use 50SMA stop (avoids wick-out)",type:"boost"}
+    ],
+    stop:"5m close above call 50 SMA." },
+
+  { id:"NEU-4", name:"Neutral Fib + 50SMA Double S/R (Bottom)", phase:"neutral", system:"confluence",
+    desc:"Neutral range — both contracts negative. At the bottom of the range, the Fib lines up with the 0DTE puts testing their 50 SMA. Double support: structural Fib + micro 50SMA. High conviction long.",
+    wr:65, rr:2.0, timeframe:"5m + 30m",
+    confluences:[
+      {text:"Bottom Fib + put 50SMA = double support",type:"boost"},
+      {text:"Both contracts negative confirms neutral",type:"boost"},
+      {text:"Use 50SMA stop (avoids wick-out)",type:"boost"}
+    ],
+    stop:"5m close below put 50 SMA." },
+
+  { id:"NEU-OPEN", name:"Open Neutral (Discretionary / Logic-Based)", phase:"neutral", system:"open", open:true,
+    desc:"Freeform range/neutral trade taken on your own read when no predefined neutral setup fits cleanly. Use this to log trades you took purely on logic. Write your full thesis in the comment and attach charts so you can review the discretionary calls separately from your systematic ones.",
+    wr:0, rr:0, timeframe:"any",
+    confluences:[
+      {text:"State your range thesis before entry",type:"boost"},
+      {text:"Define stop & target up front",type:"boost"},
+      {text:"No mechanical signal — review these honestly",type:"warning"}
+    ],
+    stop:"Discretionary — define before entry and note it in the comment." },
+
+  // ========== MISCELLANEOUS ==========
+  { id:"MISC-1", name:"2+ Fib Extension Fade", phase:"misc", system:"fib",
+    desc:"Price has moved 2+ Fib levels in one day with no retracement. Take the opposite side of trend from the 3rd Fib level onwards. May align with overbought 0DTE levels but not required.",
+    wr:50, rr:2.0, timeframe:"30m",
+    confluences:[
+      {text:"3rd Fib and beyond = fade zone",type:"boost"},
+      {text:"0DTE overbought (+3.50-4.00 above 50)",type:"boost"},
+      {text:"0DTE momentum still strong → proceed anyway",type:""}
+    ],
+    stop:"ES: 11pts past 3rd Fib | NQ: 60pts past." },
+
+  { id:"MISC-2", name:"Overbought 0DTE Fade", phase:"misc", system:"sma",
+    desc:"0DTE contract is +3.50 to +4.00 above its 50 SMA. Buy the overbought contract (0DTE ONLY — never weeklies). Mean reversion play.",
+    wr:55, rr:1.5, timeframe:"5m",
+    confluences:[
+      {text:"+3.50 to +4.00 above 50 SMA",type:"boost"},
+      {text:"Near Fib level → extra conviction",type:"boost"},
+      {text:"0DTE only — NOT on weeklies",type:"warning"}
+    ],
+    stop:"5m candle close — if it keeps running, exit." },
+
+  { id:"MISC-3", name:"0DTE Cross Into Fib (67% Break Warning)", phase:"misc", system:"confluence",
+    desc:"A 0DTE cross is actively pushing price into a Fib level. Without a HTF level supporting the Fib, 67% likelihood the Fib breaks. Consider NOT fading this — instead, trade the break direction if 30m confirms.",
+    wr:33, rr:2.5, timeframe:"5m + 30m",
+    confluences:[
+      {text:"No HTF level supporting Fib → likely breaks (67%)",type:"warning"},
+      {text:"HTF level aligns with Fib → may hold",type:"boost"},
+      {text:"If break confirmed on 30m close → trade break direction",type:""}
+    ],
+    stop:"If fading: ES 11pts / NQ 60pts. If trading break: retest of broken Fib." },
+
+  { id:"MISC-4", name:"Weekly 50SMA Bounce (No Fib — Double SMA)", phase:"misc", system:"sma",
+    desc:"Weekly contracts crossed positive. Price pulls back to the weekly 50 SMA and the 30m or 1H 50 SMA is also nearby (double SMA confluence). No Fib needed because the SMA stack provides structure. Only take this when NOT extended on the weekly TF.",
+    wr:58, rr:1.5, timeframe:"30m",
+    confluences:[
+      {text:"Weekly 50SMA + 30m/1H 50SMA nearby = double SMA",type:"boost"},
+      {text:"Weekly contracts positively crossed",type:"boost"},
+      {text:"Extended on weekly TF → need Fib instead (see BUL-5/BER-5)",type:"warning"},
+      {text:"Choppy month → lower reliability",type:"warning"}
+    ],
+    stop:"30m candle close below/above 50 SMA." },
+];</script>
+<script>'use strict';
+// All performance views and exports share these calculations.
+const Core = (() => {
+  const VERSION = 4;
+  const POINT_VALUES = {ES:50, NQ:20, MES:5, MNQ:2};
+  const num = v => !['number','string'].includes(typeof v) || (typeof v === 'string' && !v.trim()) ? null : Number.isFinite(Number(v)) ? Number(v) : null;
+  const uid = () => globalThis.crypto?.randomUUID?.() || 'j-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+  const clone = x => JSON.parse(JSON.stringify(x));
+  const mean = a => a.length ? a.reduce((s,x)=>s+x,0)/a.length : null;
+  const median = a => { if(!a.length) return null; const b=[...a].sort((x,y)=>x-y), i=Math.floor(b.length/2); return b.length%2?b[i]:(b[i-1]+b[i])/2; };
+  const validDate = s => typeof s==='string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && Number.isFinite(Date.parse(s+'T12:00:00Z')) && new Date(s+'T12:00:00Z').toISOString().slice(0,10)===s;
+  function dateInZone(d=new Date(), zone='America/New_York') {
+    const parts=new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(d);
+    return ['year','month','day'].map(k=>parts.find(p=>p.type===k).value).join('-');
+  }
+  function addDays(s,n){const d=new Date(s+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
+  function monday(s){const d=new Date(s+'T12:00:00Z');return addDays(s,-((d.getUTCDay()+6)%7));}
+  function wallParts(ms,zone){
+    const p=new Intl.DateTimeFormat('en-GB',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date(ms));
+    const o=Object.fromEntries(p.map(x=>[x.type,x.value]));return `${o.year}-${o.month}-${o.day}T${o.hour}:${o.minute}:${o.second}`;
+  }
+  // Reject nonexistent or repeated DST wall times rather than silently moving a fill.
+  function wallToISO(wall,zone){
+    if(!wall) return null;
+    const normalized=wall.length===16?wall+':00':wall;
+    if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(normalized)||!validDate(normalized.slice(0,10)))throw Error('Use a valid entry/exit date and time.');
+    const guess=Date.parse(normalized+'Z');if(!Number.isFinite(guess))throw Error('Invalid timestamp.');
+    const offsets=new Set([-36,-12,0,12,36].map(h=>{const ts=guess+h*3600000;return Date.parse(wallParts(ts,zone)+'Z')-ts;}));
+    const matches=[...offsets].map(o=>guess-o).filter(t=>wallParts(t,zone)===normalized);
+    if(matches.length!==1)throw Error(matches.length?'This time occurs twice because of daylight saving. Enter it in UTC and choose UTC as the time zone.':'This local time does not exist because of daylight saving.');
+    return new Date(matches[0]).toISOString();
+  }
+  function empty(){return {version:VERSION,revision:0,trades:[],ghostTrades:[],dayNotes:{},weeklyReviews:{},trash:[],strategyVersions:[{id:'v1',name:'Current rules',createdAt:new Date().toISOString(),notes:''}],playbookOverrides:{},settings:{timezone:'America/New_York',defaultVersion:'v1',lastBackup:null}};}
+  function normalizeTrade(raw){
+    if(!raw || typeof raw!=='object' || Array.isArray(raw))throw Error('A trade record is not an object.');
+    if(!validDate(raw.date))throw Error('A trade has a missing or invalid date. No data was imported.');
+    const t={...clone(raw),id:String(raw.id??uid()),status:raw.status||'closed',accountingMode:raw.accountingMode||'points',strategyVersion:raw.strategyVersion||'Legacy / unversioned'};
+    for(const k of ['entry','exit','pnl','rr','stopDist','plannedTarget','plannedEntry','mfe','mae','premiumAtCross','initialRiskDollars','pointValue','fees','afterMfe','afterMae','observationMinutes'])t[k]=num(raw[k]);
+    t.images=Array.isArray(raw.images)?raw.images.map(i=>typeof i==='string'?{data:i,label:'Unlabelled'}:i):[];
+    t.context=Array.isArray(raw.context)?raw.context:[];
+    t.entries=Array.isArray(raw.entries)?raw.entries.map(f=>({...f,qty:num(f.qty),price:num(f.price)})):[];
+    t.exits=Array.isArray(raw.exits)?raw.exits.map(f=>({...f,qty:num(f.qty),price:num(f.price)})):[];
+    t.excursionScope=raw.excursionScope||'Unknown (legacy)';
+    t.planTiming=raw.planTiming||'Unknown (legacy)';
+    t.gates=raw.gates||Object.fromEntries(Object.entries(raw.triggerChecklist?.gates||{}).map(([k,v])=>[k,v?'pass':'fail']));
+    t.gateRegime=raw.gateRegime||(raw.htfTrend===true?'htf':raw.htfTrend===false?'notrend':'unknown');
+    t.sTier=typeof raw.sTier==='boolean'?raw.sTier:raw.setupTier==='S';
+    t.legacyOutcome=raw.legacyOutcome||(raw.outcome||null);
+    t.revisions=Array.isArray(raw.revisions)?raw.revisions:[];
+    return t;
+  }
+  function normalize(input){
+    if(Array.isArray(input))input={trades:input};
+    if(!input||typeof input!=='object'||!Array.isArray(input.trades))throw Error('Choose a journal JSON backup containing a trades array.');
+    if(num(input.version)>VERSION)throw Error('This backup comes from a newer journal version.');
+    if(input.trades.length>100000)throw Error('This backup exceeds 100,000 trades.');
+    const out={...empty(),...clone(input),version:VERSION};
+    out.trades=input.trades.map(normalizeTrade);
+    out.ghostTrades=(input.ghostTrades||[]).map(g=>{if(!g||!validDate(g.date))throw Error('A skipped setup has an invalid date.');return {...g,id:String(g.id??uid()),category:g.category||'Unclassified (legacy)',recordTiming:g.recordTiming||'Unknown (legacy)',wouldR:num(g.wouldR),revisions:g.revisions||[]};});
+    out.dayNotes=input.dayNotes&&typeof input.dayNotes==='object'&&!Array.isArray(input.dayNotes)?input.dayNotes:{};
+    out.weeklyReviews=input.weeklyReviews||{};out.trash=Array.isArray(input.trash)?input.trash:[];
+    out.settings={...empty().settings,...(input.settings||{})};
+    out.strategyVersions=Array.isArray(input.strategyVersions)&&input.strategyVersions.length?input.strategyVersions:empty().strategyVersions;
+    out.playbookOverrides=input.playbookOverrides||{};
+    for(const records of [out.trades,out.ghostTrades]){const ids=new Set();for(const t of records){if(ids.has(t.id))throw Error('Duplicate record IDs in the backup. Import was cancelled.');ids.add(t.id);}}
+    return out;
+  }
+  function calculate(t){
+    const closed=t.status==='closed', sign=t.direction==='Short'?-1:1, stop=num(t.stopDist);
+    let pnl=num(t.pnl),entry=num(t.entry),exit=num(t.exit),gross=null,net=null,risk=null,qty=null,exitQty=null,basis='Gross R',error=null;
+    if(t.accountingMode==='fills'){
+      const es=t.entries||[],xs=t.exits||[];
+      const good=f=>num(f.qty)>0&&Number.isInteger(num(f.qty))&&num(f.price)>0;
+      if(!es.length||!es.every(good)||!xs.every(good))error='Incomplete fills';
+      else{
+        qty=es.reduce((s,f)=>s+Number(f.qty),0);exitQty=xs.reduce((s,f)=>s+Number(f.qty),0);
+        entry=es.reduce((s,f)=>s+Number(f.qty)*Number(f.price),0)/qty;
+        exit=exitQty?xs.reduce((s,f)=>s+Number(f.qty)*Number(f.price),0)/exitQty:null;
+        if(exitQty>qty || (closed&&exitQty!==qty))error='Entry and exit quantities do not match';
+        pnl=exit===null?null:(exit-entry)*sign;
+        const pv=num(t.pointValue);
+        if(pv>0){gross=xs.reduce((s,f)=>s+(Number(f.price)-entry)*Number(f.qty)*pv*sign,0);if(num(t.fees)!==null&&num(t.fees)>=0)net=gross-num(t.fees);}
+        risk=num(t.initialRiskDollars)>0?num(t.initialRiskDollars):null;
+        basis=net!==null?'Net R':'Gross R';
+      }
+    }else if(entry!==null&&exit!==null)pnl=(exit-entry)*sign;
+    const r=!closed||error?null:t.accountingMode==='fills'?(risk>0&&(net??gross)!==null?(net??gross)/risk:null):(stop>0&&pnl!==null?pnl/stop:null);
+    const result=!closed||error?null:(net??gross??pnl);
+    const outcome=result===null?null:result>1e-8?'W':result< -1e-8?'L':'BE';
+    const mfe=num(t.mfe),mae=num(t.mae);
+    return {closed,pnl,entry,exit,gross,net,risk,qty,exitQty,r:Number.isFinite(r)?r:null,basis,outcome,error,mfeR:stop>0&&mfe!==null?mfe/stop:null,maeR:stop>0&&mae!==null?mae/stop:null};
+  }
+  const GATES={
+    htf:[['noHHResist','No higher-timeframe resistance in the path'],['dteAlignsHTF','0DTE play aligns with the HTF trend'],['pairAlign','Leader crossed; laggard at least above its 50'],['slope','50 SMA flat or moving with the trade'],['smtDiverge','SPY-anchored SMT divergence at the 50']],
+    notrend:[['noWeekly50','Not trading into a weekly call / put 50 SMA'],['bothCrossed','Both SPY and QQQ crossed'],['slopeRange','50 SMA moving with the trade']]
+  };
+  function compliance(t){
+    const list=GATES[t.gateRegime];if(!list)return 'Not assessed';
+    const vals=list.map(([k])=>t.gates?.[k]||'unknown');
+    if(vals.includes('fail'))return 'Violation';
+    if(vals.includes('unknown')||!vals.includes('pass'))return 'Not assessed';
+    return 'Passed';
+  }
+  function stats(rows){
+    const closed=rows.filter(t=>t.status==='closed'),ms=closed.map(calculate),valid=ms.filter(m=>m.r!==null),rs=valid.map(m=>m.r),cash=ms.filter(m=>m.net!==null&&!m.error);
+    const wins=ms.filter(m=>m.outcome==='W').length,losses=ms.filter(m=>m.outcome==='L').length,bes=ms.filter(m=>m.outcome==='BE').length;
+    const wrs=rs.filter(r=>r>1e-8),lrs=rs.filter(r=>r< -1e-8),sum=a=>a.reduce((s,x)=>s+x,0),winSum=sum(wrs),lossSum=-sum(lrs);
+    const avgW=mean(wrs),avgL=mean(lrs),totalR=rs.length?sum(rs):null;
+    const ordered=closed.slice().sort((a,b)=>sortKey(a).localeCompare(sortKey(b))).map(calculate).filter(m=>m.r!==null);
+    let high=0,eq=0,dd=0;for(const m of ordered){eq+=m.r;high=Math.max(high,eq);dd=Math.max(dd,high-eq);}
+    const netCount=valid.filter(m=>m.basis==='Net R').length;
+    return {n:closed.length,known:ms.filter(m=>m.outcome!==null).length,nR:rs.length,nCash:cash.length,totalR,net:cash.length?sum(cash.map(m=>m.net)):null,expectancy:mean(rs),wins,losses,bes,winRate:wins+losses?wins/(wins+losses)*100:null,avgW,avgL,payoff:avgW!==null&&avgL!==null?avgW/-avgL:null,pf:lossSum?winSum/lossSum:null,drawdown:rs.length?dd:null,withoutBest:wrs.length&&rs.length>1?(sum(rs)-Math.max(...wrs))/(rs.length-1):null,basis:netCount===valid.length&&netCount?'Net R':netCount?'Mixed gross / net R':'Gross R',netRCount:netCount,rs};
+  }
+  function sortKey(t){return t.exitAt||t.entryAt||t.date+'T'+(t.exitTime||t.entryTime||'00:00');}
+  function group(rows,fn){const m=new Map();for(const t of rows){const k=fn(t)||'Not recorded';if(!m.has(k))m.set(k,[]);m.get(k).push(t);}return [...m].map(([name,ts])=>({name,rows:ts,...stats(ts)}));}
+  function fingerprint(t){
+    if(t.externalId)return 'external:'+JSON.stringify([t.importSource||'',t.account||'',t.externalId]);
+    return JSON.stringify([t.date,t.instrument,t.direction,t.entryAt||t.entryTime||'',t.exitAt||t.exitTime||'',t.account||'',t.accountingMode,t.entries||[],t.exits||[],num(t.entry),num(t.exit),num(t.pnl),num(t.stopDist)]);
+  }
+  function parseCSV(text){
+    text=text.replace(/^\uFEFF/,'');const rows=[];let row=[],cell='',quoted=false;
+    for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'){if(quoted&&text[i+1]==='"'){cell+='"';i++;}else if(!quoted&&cell.length)throw Error('Unexpected quote in CSV.');else quoted=!quoted;}else if(c===','&&!quoted){row.push(cell);cell='';}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cell);if(row.some(s=>s!==''))rows.push(row);row=[];cell='';}else cell+=c;}
+    if(quoted)throw Error('Unclosed quote in CSV.');row.push(cell);if(row.some(s=>s!==''))rows.push(row);
+    if(rows.length<2)throw Error('CSV needs a header and at least one trade.');return {headers:rows[0],rows:rows.slice(1)};
+  }
+  function csvCell(v){let s=v===null||v===undefined?'':String(v);if(/^[\s]*[=+@]/.test(s)||(/^[\s]*-/.test(s)&&!Number.isFinite(Number(s))))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}
+  return {VERSION,POINT_VALUES,GATES,num,uid,clone,mean,median,validDate,dateInZone,addDays,monday,wallParts,wallToISO,empty,normalizeTrade,normalize,calculate,compliance,stats,group,sortKey,fingerprint,parseCSV,csvCell};
+})();
+globalThis.JournalCore=Core;
+</script>
+<script>'use strict';
+const Store = (()=>{
+  let db=null,urls=new Map(),baseRevision=0;
+  const DB_NAME='trade-setup-journal-v4';
+  const request=r=>new Promise((resolve,reject)=>{r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
+  const finished=tx=>new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onabort=()=>reject(tx.error||Error('Save cancelled.'));tx.onerror=()=>reject(tx.error);});
+  async function open(){
+    const r=indexedDB.open(DB_NAME,1);
+    r.onupgradeneeded=()=>{const d=r.result;d.createObjectStore('state');d.createObjectStore('snapshots',{keyPath:'id'});d.createObjectStore('media',{keyPath:'id'});};
+    db=await request(r);db.onversionchange=()=>db.close();
+    return db;
+  }
+  async function getState(){const v=await request(db.transaction('state').objectStore('state').get('main'));baseRevision=v?.revision||0;return v;}
+  function cleanHTML(html){
+    const doc=new DOMParser().parseFromString(String(html||''),'text/html');
+    const allowed=new Set(['P','BR','DIV','SPAN','B','STRONG','I','EM','U','S','UL','OL','LI','BLOCKQUOTE','H2','H3','H4','PRE','CODE','IMG']);
+    function clean(parent){for(const n of [...parent.childNodes]){if(n.nodeType===8){n.remove();continue;}if(n.nodeType!==1)continue;if(['SCRIPT','STYLE','IFRAME','OBJECT','EMBED','SVG','MATH','LINK','META','FORM','INPUT'].includes(n.tagName)){n.remove();continue;}clean(n);if(!allowed.has(n.tagName)){n.replaceWith(...n.childNodes);continue;}const src=n.getAttribute('src'),media=n.getAttribute('data-media'),alt=n.getAttribute('alt');for(const a of [...n.attributes])n.removeAttribute(a.name);if(n.tagName==='IMG'){if(media&&/^[\w-]+$/.test(media))n.setAttribute('data-media',media);else if(src&&/^data:image\/(png|jpe?g|webp|gif);base64,[a-z\d+/=\s]+$/i.test(src))n.setAttribute('src',src);else{n.remove();continue;}n.setAttribute('alt',alt||'Journal chart');}}}
+    clean(doc.body);return doc.body.innerHTML;
+  }
+  async function addBlob(blob,id=Core.uid()){
+    if(!(blob instanceof Blob)||!/^image\/(png|jpeg|webp|gif)$/.test(blob.type))throw Error('Use PNG, JPEG, WebP, or GIF screenshots.');
+    const tx=db.transaction('media','readwrite'),done=finished(tx);tx.objectStore('media').put({id,blob});await done;return id;
+  }
+  async function dataToMedia(data){
+    if(!/^data:image\/(png|jpe?g|webp|gif);base64,/i.test(data))throw Error('Unsupported embedded screenshot.');
+    const comma=data.indexOf(','),mime=data.slice(5,data.indexOf(';')),s=atob(data.slice(comma+1)),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);
+    return addBlob(new Blob([a],{type:mime==='image/jpg'?'image/jpeg':mime}));
+  }
+  async function importImages(s){
+    const all=[...s.trades,...s.ghostTrades,...(s.trash||[]).map(x=>x.record)];
+    for(const t of all){if(!t)continue;const out=[];for(const raw of (t.images||[])){const im=typeof raw==='string'?{data:raw,label:'Unlabelled'}:raw;if(im.data){out.push({id:await dataToMedia(im.data),label:im.label||'Unlabelled'});}else if(im.id){out.push({...im});}}
+      t.images=out;
+    }
+    for(const [date,html]of Object.entries(s.dayNotes||{})){
+      const doc=new DOMParser().parseFromString(cleanHTML(html),'text/html');
+      for(const im of doc.querySelectorAll('img[src]')){const id=await dataToMedia(im.getAttribute('src'));im.removeAttribute('src');im.setAttribute('data-media',id);}
+      s.dayNotes[date]=doc.body.innerHTML;
+    }
+    return s;
+  }
+  async function mediaURL(id){if(urls.has(id))return urls.get(id);const v=await request(db.transaction('media').objectStore('media').get(id));if(!v)return null;const url=URL.createObjectURL(v.blob);urls.set(id,url);return url;}
+  async function hydrate(root){for(const img of root.querySelectorAll('img[data-media]')){const url=await mediaURL(img.dataset.media);if(url&&img.isConnected)img.src=url;else if(!url)img.alt='Screenshot unavailable — reimport the full backup';}}
+  async function hydrateHTML(html){const doc=new DOMParser().parseFromString(cleanHTML(html),'text/html');for(const im of doc.querySelectorAll('img[data-media]')){const url=await mediaURL(im.dataset.media);if(url)im.src=url;}return doc.body.innerHTML;}
+  function blobData(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.readAsDataURL(blob);});}
+  function mediaRefs(s){
+    const ids=new Set();for(const t of [...s.trades,...s.ghostTrades,...(s.trash||[]).map(x=>x.record)])for(const im of (t?.images||[]))if(im.id)ids.add(im.id);
+    for(const html of Object.values(s.dayNotes||{})){const d=new DOMParser().parseFromString(html,'text/html');for(const img of d.querySelectorAll('img[data-media]'))ids.add(img.dataset.media);}
+    return [...ids];
+  }
+  async function bundle(s){
+    const out=Core.clone(s);out.exportDate=new Date().toISOString();out.media={};
+    for(const id of mediaRefs(s)){const v=await request(db.transaction('media').objectStore('media').get(id));if(!v)throw Error('A screenshot is missing. Reimport its original backup before exporting a complete backup.');out.media[id]=await blobData(v.blob);}
+    return out;
+  }
+  async function unpack(s){
+    // Assign fresh IDs so importing a backup cannot replace media used by another snapshot.
+    const remap=new Map();for(const [old,data]of Object.entries(s.media||{}))remap.set(old,await dataToMedia(data));
+    for(const t of [...s.trades,...s.ghostTrades,...(s.trash||[]).map(x=>x.record)])for(const im of(t?.images||[]))if(im.id&&remap.has(im.id))im.id=remap.get(im.id);
+    for(const [date,html]of Object.entries(s.dayNotes||{})){const doc=new DOMParser().parseFromString(cleanHTML(html),'text/html');for(const im of doc.querySelectorAll('img[data-media]'))if(remap.has(im.dataset.media))im.dataset.media=remap.get(im.dataset.media);s.dayNotes[date]=doc.body.innerHTML;}
+    delete s.media;await importImages(s);
+    for(const id of mediaRefs(s)){const v=await request(db.transaction('media').objectStore('media').get(id));if(!v)throw Error('This backup is missing an attached image. Choose a full JSON backup.');}
+    return s;
+  }
+  async function save(next,reason='Saved changes'){
+    const copy=Core.clone(next),tx=db.transaction(['state','snapshots'],'readwrite'),done=finished(tx);
+    let conflict=false;
+    const stateStore=tx.objectStore('state'),get=stateStore.get('main');
+    get.onsuccess=()=>{
+      const old=get.result;
+      if((old?.revision||0)!==baseRevision){conflict=true;tx.abort();return;}
+      if(old)tx.objectStore('snapshots').put({id:Core.uid(),at:new Date().toISOString(),reason,state:old});
+      copy.revision=baseRevision+1;copy.updatedAt=new Date().toISOString();stateStore.put(copy,'main');
+      const snaps=tx.objectStore('snapshots').getAll();snaps.onsuccess=()=>{const records=snaps.result.sort((a,b)=>b.at.localeCompare(a.at));for(const x of records.slice(30))tx.objectStore('snapshots').delete(x.id);};
+    };
+    try{await done;}catch(e){if(conflict)throw Error('Another tab saved changes. Copy any unsaved edits, then reload this tab before saving.');throw e;}
+    baseRevision=copy.revision;return copy;
+  }
+  async function snapshots(){return (await request(db.transaction('snapshots').objectStore('snapshots').getAll())).sort((a,b)=>b.at.localeCompare(a.at));}
+  async function snapshot(id){return request(db.transaction('snapshots').objectStore('snapshots').get(id));}
+  async function initial(){
+    await open();const stored=await getState();if(stored)return {state:Core.normalize(stored),migrated:false};
+    let old;
+    try{const ts=localStorage.getItem('trades'),gs=localStorage.getItem('ghostTrades'),ns=localStorage.getItem('dayNotes');if(ts||gs||ns)old={trades:JSON.parse(ts||'[]'),ghostTrades:JSON.parse(gs||'[]'),dayNotes:JSON.parse(ns||'{}')};}
+    catch(e){throw Error('An older browser record could not be read. It was not modified. Open the old journal and export a valid backup.');}
+    const s=old?await importImages(Core.normalize(old)):Core.empty();return {state:await save(s,old?'Imported older browser journal':'Created journal'),migrated:!!old};
+  }
+  return {initial,save,snapshots,snapshot,cleanHTML,addBlob,mediaURL,hydrate,hydrateHTML,importImages,bundle,unpack,mediaRefs};
+})();
+</script>
+<script>'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const n=Core.num, fmt=(v,d=2)=>v===null||v===undefined||!Number.isFinite(v)?'—':v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const rfmt=v=>v===null||v===undefined?'—':(v>0?'+':'')+fmt(v)+'R';
+const money=v=>v===null||v===undefined?'—':(v<0?'−':'')+'$'+fmt(Math.abs(v));
+const tone=v=>v>0?'positive':v<0?'negative':'';
+const pct=v=>v===null?'—':fmt(v,1)+'%';
+const chip=(label,kind='')=>`<span class="chip ${kind}">${e(label)}</span>`;
+const button=(label,action,id='',cls='')=>`<button class="btn ${cls}" data-action="${e(action)}" data-id="${e(id)}" type="button">${e(label)}</button>`;
+function field(label,name,value='',type='text',opts={}){
+  const att=`name="${e(name)}" ${opts.required?'required':''} ${opts.readonly?'readonly':''} ${opts.min!==undefined?'min="'+e(opts.min)+'"':''} ${opts.max!==undefined?'max="'+e(opts.max)+'"':''} ${type==='number'?'step="'+e(opts.step||'any')+'"':''} ${opts.placeholder?'placeholder="'+e(opts.placeholder)+'"':''}`;
+  return `<label class="field ${opts.full?'full':''}"><span>${e(label)}</span>${type==='textarea'?`<textarea ${att}>${e(value)}</textarea>`:`<input type="${e(type)}" ${att} value="${e(value)}">`}${opts.hint?`<span class="hint">${e(opts.hint)}</span>`:''}</label>`;
+}
+function select(label,name,value,values,opts={}){
+  const choices=values.map(v=>Array.isArray(v)?v:[v,v]);if(value!==undefined&&value!==null&&value!==''&&!choices.some(v=>String(v[0])===String(value)))choices.push([value,value]);
+  return `<label class="field ${opts.full?'full':''}"><span>${e(label)}</span><select name="${e(name)}" ${opts.required?'required':''}>${choices.map(([v,l])=>`<option value="${e(v)}" ${String(value??'')===String(v)?'selected':''}>${e(l)}</option>`).join('')}</select>${opts.hint?`<span class="hint">${e(opts.hint)}</span>`:''}</label>`;
+}
+const unknown=['','Not recorded'];
+const setups=()=>SETUPS.map(s=>[s.id,s.id+' · '+s.name]);
+const setupName=id=>SETUPS.find(s=>s.id===id)?.name||id||'No setup';
+const versions=()=>S.strategyVersions.map(v=>[v.id,v.id+' · '+v.name]);
+const sessions=[unknown,'NY Open','Silver Bullet AM','Late AM','Lunch','NY PM','Silver Bullet PM','Power Hour'];
+const table=(headers,rows)=>`<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th>${e(h)}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.join(''):`<tr><td colspan="${headers.length}" class="empty">No matching records.</td></tr>`}</tbody></table></div>`;
+const card=(title,subtitle,body,extra='')=>`<section class="card"><div class="card-head"><div><h3>${e(title)}</h3>${subtitle?`<p>${e(subtitle)}</p>`:''}</div>${extra}</div>${body}</section>`;
+const stat=(label,value,caption='',cls='')=>`<div class="stat ${cls}"><div class="stat-label">${e(label)}</div><div class="stat-value number">${value}</div><div class="stat-caption">${e(caption)}</div></div>`;
+const empty=(title,text,action='Log a trade',act='new-trade')=>`<div class="empty"><div class="empty-icon">↗</div><h3>${e(title)}</h3><p>${e(text)}</p>${button(action,act,'','primary')}</div>`;
+let S=Core.empty(),page='dashboard',ready=false,queue=Promise.resolve(),toastTimer;
+let filters={from:'',to:'',version:'',basis:'',instrument:'',setup:'',regime:'',grade:'',compliance:'',direction:'',session:'',conviction:'',pairState:'',entryVsTrigger:'',exitReason:'',leader:'',phase:'',state:'',mistakeTag:'',setupTier:'',htfTrend:'',trigger:'',timeframe:'',underlying:'',optionSide:'',cross:'',position:'',slope:'',interaction:'',outcome:'',search:''};
+let curveMode='r',groupDimension='setup',playbookPhase='all',currentWeek=Core.monday(Core.dateInZone()),journalDate=Core.dateInZone(),calendarMonth=journalDate.slice(0,7),noteDirty=false,noteTimer=null,weekDirty=false,weekTimer=null,noteGeneration=0,weekGeneration=0;
+let draft=null,editTab='plan',draftDirty=false,editingId=null,ghostDraft=null,ghostDirty=false,pendingImport=null,csvSource=null;
+const pageNames={dashboard:['Overview','YOUR PROCESS, IN FOCUS'],trades:['Trade log','EVERY DECISION HAS A RECORD'],opportunities:['Skipped setups','OBSERVE THE OPPORTUNITIES'],analytics:['Research','ASK BETTER QUESTIONS'],weekly:['Weekly review','ONE WEEK. ONE NEXT STEP.'],journal:['Daily journal','CONTEXT BEHIND THE NUMBERS'],playbook:['Playbook','YOUR RULES, MADE EXPLICIT'],data:['Data & settings','KEEP YOUR WORK WITH YOU']};
+function toast(msg){$('#toast').textContent=msg;$('#toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('visible'),5500);}
+function setStatus(msg){$('#save-status').textContent=msg;}
+function mutate(reason,fn){
+  const task=queue.then(async()=>{setStatus('Saving…');const next=Core.clone(S);await fn(next);S=await Store.save(next,reason);setStatus('All changes saved');return S;});
+  queue=task.catch(err=>{setStatus('Save failed · backup now');toast(err.message);});return task;
+}
+function filtered(){
+  return S.trades.filter(t=>{
+    if(filters.from&&t.date<filters.from||filters.to&&t.date>filters.to)return false;
+    if(filters.version&&t.strategyVersion!==filters.version)return false;
+    const m=Core.calculate(t);
+    if(filters.basis&&m.basis!==filters.basis)return false;
+    if(filters.compliance&&Core.compliance(t)!==filters.compliance)return false;
+    if(filters.outcome&&m.outcome!==filters.outcome)return false;
+    if(filters.htfTrend&&t.gateRegime!==filters.htfTrend)return false;
+    if(filters.setupTier&&(t.sTier?'S':Core.compliance(t))!==filters.setupTier)return false;
+    for(const k of ['instrument','setup','regime','grade','direction','session','conviction','pairState','entryVsTrigger','exitReason','leader','phase','state','mistakeTag','trigger'])if(filters[k]&&t[k]!==filters[k])return false;
+    const ctxKeys=['timeframe','underlying','optionSide','cross','position','slope','interaction'];
+    if(ctxKeys.some(k=>filters[k])&&!(t.context||[]).some(c=>ctxKeys.every(k=>!filters[k]||c[k]===filters[k])))return false;
+    if(filters.search&&!JSON.stringify([t.setup,t.comment,t.thesis,t.account,t.reviewNote]).toLowerCase().includes(filters.search.toLowerCase()))return false;
+    return true;
+  });
+}
+function filterBar(deep=false){
+  const ver=[['','All strategy versions'],...[...new Set(S.trades.map(t=>t.strategyVersion).concat(S.strategyVersions.map(v=>v.id)))].sort()];
+  let h=`<div class="toolbar"><div class="filters">${field('From','filter.from',filters.from,'date')}${field('To','filter.to',filters.to,'date')}${select('Strategy','filter.version',filters.version,ver)}${select('R basis','filter.basis',filters.basis,[['','All (coverage shown)'],'Net R','Gross R'])}</div><div class="row">${button('This month','this-month')}${button('Reset filters','reset-filters')}</div></div>`;
+  if(deep){const options=[
+    ['Instrument','instrument',[['','All'],...Object.keys(Core.POINT_VALUES)]],['Setup','setup',[['','All'],...setups()]],['Direction','direction',[['','All'],'Long','Short']],['Regime','regime',[['','All'],'Trend','Chop','Unclear']],['Execution grade','grade',[['','All'],'A','B','C']],['Rule adherence','compliance',[['','All'],'Passed','Violation','Not assessed']],['Outcome','outcome',[['','All'],['W','Win'],['L','Loss'],['BE','Breakeven']]],['Session','session',[['','All'],...sessions.slice(1)]],['Conviction','conviction',[['','All'],'A+','B','C']],['Leader','leader',[['','All'],'SPY','QQQ']],['Pair state','pairState',[['','All'],'Confirmed','Above50','Below50']],['Entry timing','entryVsTrigger',[['','All'],'On-trigger','Late','Anticipated']],['Exit reason','exitReason',[['','All'],'Target hit','Trailed out','Stopped','Time/EOD','Early profit','Fear/bail','Better signal']],['Market phase','phase',[['','All'],'Bullish','Bearish','Neutral']],['State','state',[['','All'],'Calm','Hesitant','FOMO','Frustrated','Bored']],['Mistake','mistakeTag',[['','All'],'None','Moved stop','Cut winner early','Let loser run','Oversize','Revenge','FOMO chase','Ignored regime']],['HTF trend','htfTrend',[['','All'],['htf','Present'],['notrend','Absent'],['unknown','Unknown']]],['Setup tier','setupTier',[['','All'],'S','Passed','Violation','Not assessed']],['0DTE trigger','trigger',[['','All'],'Positive call cross','Negative put cross','Call 50 bounce','Put 50 reject','Positive put cross','Negative call cross','Put 50 bounce','Call 50 reject','Other']]
+  ];h+=`<details ${Object.entries(filters).some(([k,v])=>v&&!['from','to','version','basis'].includes(k))?'open':''} style="margin:0 0 20px;background:var(--card)"><summary>Explore conditions · combine filters</summary><div class="form-grid four">${options.map(([l,k,vals])=>select(l,'filter.'+k,filters[k],vals)).join('')}${field('Search notes / account','filter.search',filters.search)}</div><div class="form-section">HTF context · all selected conditions must match the same context row</div><div class="form-grid four">${contextFilterFields()}</div></details>`;}
+  return h;
+}
+function contextFilterFields(){return [['Timeframe','timeframe',['30m','1h','4h']],['Underlying','underlying',['SPY','QQQ']],['Option side','optionSide',['Call','Put']],['Cross state','cross',['Positive','Negative','Uncrossed']],['Price vs 50','position',['Above','At','Below']],['50 slope','slope',['Up','Flat','Down']],['Interaction','interaction',['Bounce','Rejection','Reclaim','Extension','None']]].map(([l,k,vals])=>select(l,'filter.'+k,filters[k],[['','All'],...vals])).join('');}
+function metrics(s){return `<div class="stats-grid">${stat('Total R',rfmt(s.totalR),`${s.nR} of ${s.n} closed trades · ${s.basis}`,'primary-stat')}${stat('Expectancy',`<span class="${tone(s.expectancy)}">${rfmt(s.expectancy)}</span>`,'Average signed R per measured trade')}${stat('Net P&L',`<span class="${tone(s.net)}">${money(s.net)}</span>`,`${s.nCash} of ${s.n} trades have complete costs`)}${stat('Win rate',pct(s.winRate),`${s.wins} W / ${s.losses} L / ${s.bes} BE · BE excluded`)}</div>`;}
+function sampleNote(s){return `<div class="callout">${s.n?`<strong>${s.n} closed trades</strong> · R coverage ${s.nR}/${s.n} · net-dollar coverage ${s.nCash}/${s.n}. ${s.basis==='Mixed gross / net R'?'This selection mixes results before and after fees; use the R-basis filter for like-for-like comparisons. ':''}${s.n<30?'Limited sample: use this as a research lead, not a validated edge.':'Sample size alone does not validate an edge. Compare a later period before changing your rules.'}`:'Your first completed trade will start the analysis. Planned and open trades are excluded from performance.'}</div>`;}
+function equity(rows,mode='r'){
+  const data=rows.filter(t=>t.status==='closed').sort((a,b)=>Core.sortKey(a).localeCompare(Core.sortKey(b))).map(t=>({t,m:Core.calculate(t)})).filter(x=>!x.m.error&&(mode==='r'?x.m.r:x.m.net)!==null);
+  if(!data.length)return empty('Your curve starts here','Completed trades with recorded risk will appear here. Import your existing JSON backup to continue.','Import backup','import-json');
+  const w=window.innerWidth<800?360:760,h=236,p={l:52,r:16,t:18,b:30},vals=[0];for(const x of data)vals.push(vals[vals.length-1]+(mode==='r'?x.m.r:x.m.net));
+  let lo=Math.min(...vals),hi=Math.max(...vals);if(lo===hi){lo-=1;hi+=1;}const pad=(hi-lo)*.12;lo-=pad;hi+=pad;
+  const x=i=>p.l+i/(vals.length-1)*(w-p.l-p.r),y=v=>p.t+(hi-v)/(hi-lo)*(h-p.t-p.b);
+  const pts=vals.map((v,i)=>`${x(i)},${y(v)}`).join(' '),base=h-p.b;
+  return `<svg class="chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Cumulative ${mode==='r'?'R':'net dollar'} curve for ${data.length} trades"><title>Cumulative ${mode==='r'?'R':'net dollars'}. Starts at zero, ends at ${fmt(vals.at(-1))}.</title>${Array.from({length:5},(_,i)=>{const v=lo+(hi-lo)*i/4;return `<line class="chart-grid" x1="${p.l}" x2="${w-p.r}" y1="${y(v)}" y2="${y(v)}"/><text class="chart-label" text-anchor="end" x="${p.l-12}" y="${y(v)+3}">${fmt(v,mode==='r'?1:0)}${mode==='r'?'R':''}</text>`;}).join('')}<line class="chart-zero" x1="${p.l}" x2="${w-p.r}" y1="${y(0)}" y2="${y(0)}"/><polygon class="chart-area" points="${p.l},${base} ${pts} ${w-p.r},${base}"/><polyline class="chart-line" points="${pts}"/>${data.map((a,i)=>`<circle cx="${x(i+1)}" cy="${y(vals[i+1])}" r="3" fill="var(--green)"><title>${e(a.t.date)} · ${e(a.t.instrument)} · ${mode==='r'?rfmt(a.m.r):money(a.m.net)}</title></circle>`).join('')}<text class="chart-label" x="${p.l}" y="${h-5}">${e(data[0].t.date)}</text><text class="chart-label" text-anchor="end" x="${w-p.r}" y="${h-5}">${e(data.at(-1).t.date)}</text></svg><p class="hint">${data.length} measured trades. ${mode==='r'?'R uses the initial risk recorded for each trade.':'Net dollars include only trades with position size, point value, and fees.'} ${data.some(x=>!x.t.entryAt&&!x.t.exitAt)?'Some timestamps are missing; within-day sequencing and drawdown are approximate.':''}</p>`;
+}
+function tradeTable(rows,limit=0){
+  let list=[...rows].sort((a,b)=>Core.sortKey(b).localeCompare(Core.sortKey(a)));if(limit)list=list.slice(0,limit);
+  return table(['Date / instrument','Setup / version','Status','R result','Net $','Adherence','Grade',''],list.map(t=>{const m=Core.calculate(t),comp=Core.compliance(t);return `<tr><td><button class="table-link" data-action="detail" data-id="${e(t.id)}">${e(t.date)}</button><div class="subtext">${e(t.instrument)} · ${e(t.direction)}</div></td><td class="wrap"><strong>${e(t.setup||'Unassigned')}</strong><div class="subtext">${e(t.strategyVersion)}</div></td><td>${chip(t.status,t.status==='closed'?'':'warn')}</td><td class="number ${tone(m.r)}">${rfmt(m.r)}<div class="subtext">${m.r!==null?e(m.basis):m.error?'Check fills':'Risk not recorded'}</div></td><td class="number ${tone(m.net)}">${t.status==='closed'?money(m.net):'—'}</td><td>${chip(comp,comp==='Passed'?'good':comp==='Violation'?'bad':'')}</td><td>${e(t.grade||'—')}</td><td>${button('Open','detail',t.id,'small')}</td></tr>`;}));
+}
+function performanceList(s){return `<div class="metric-list">${[['Average winner',rfmt(s.avgW)],['Average loser',rfmt(s.avgL)],['Payoff ratio',s.payoff===null?'—':fmt(s.payoff)+'×'],['Profit factor (R)',s.pf===null?'—':fmt(s.pf)],['Closed-trade drawdown',rfmt(s.drawdown)],['Completed trades',s.n]].map(([l,v])=>`<div class="metric-row"><span>${e(l)}</span><span class="number">${e(v)}</span></div>`).join('')}</div><p class="hint section-gap">Payoff = average win ÷ absolute average loss. Profit factor is undefined without a measured loss. Drawdown here is closed-trade R, not a prop firm’s intraday trailing threshold.</p>`;}
+function coverage(rows){const closed=rows.filter(t=>t.status==='closed');const checks=[['Initial risk',t=>Core.calculate(t).r!==null],['Net costs and size',t=>Core.calculate(t).net!==null],['Entry checklist assessed',t=>Core.compliance(t)!=='Not assessed'],['HTF context recorded',t=>t.context?.length],['Execution reviewed',t=>t.grade],['Holding-window MFE / MAE',t=>t.excursionScope==='During hold'&&n(t.mfe)!==null&&n(t.mae)!==null]];return checks.map(([l,fn])=>{const count=closed.filter(fn).length;return `<div class="coverage-item"><div class="row"><span>${e(l)}</span><span class="number">${count}/${closed.length}</span></div><div class="bar-track"><span style="width:${closed.length?count/closed.length*100:0}%"></span></div></div>`;}).join('');}
+function dashboard(){const rows=filtered(),s=Core.stats(rows),opened=rows.filter(t=>t.status!=='closed');return filterBar()+(!S.trades.length?`<div class="callout good"><strong>Your journal is ready.</strong> To bring your history across, use Download Backup in your old journal, then ${button('Import that JSON','import-json','','small')}. Existing browser records are migrated automatically when accessible.</div>`:'')+metrics(s)+`<div class="grid-2">${card('Performance curve','A consistent view across ES, NQ, and micros.',equity(rows,curveMode),`<div class="segmented"><button data-action="curve" data-id="r" class="${curveMode==='r'?'active':''}">R</button><button data-action="curve" data-id="net" class="${curveMode==='net'?'active':''}">USD</button></div>`)}${card('The shape of your results','Wins, losses, and risk in the same units.',performanceList(s))}</div>`+sampleNote(s)+`<div class="grid-2">${card('Recent trades','Review the process while it is still fresh.',tradeTable(rows,5),button('View all','page','trades','small'))}${card('Data coverage','Missing information stays visible.',coverage(rows))}</div>`+(opened.length?card('Plans & open positions','Excluded from completed-trade statistics.',tradeTable(opened)):'');}
+function tradesPage(){return filterBar(true)+card('Your trade history',`${filtered().length} matching records. Open any trade to see its original plan and revisions.`,tradeTable(filtered()),`<div class="row">${button('Export CSV','export-csv','','small')}${button('Import CSV','import-csv','','small')}</div>`);}
+function groupTable(groups){return table(['Condition','Trades','R coverage','Expectancy','Win %','Avg win','Avg loss','Net $ coverage'],groups.map(g=>`<tr><td class="wrap"><strong>${e(g.name)}</strong></td><td class="number">${g.n}</td><td>${g.nR}/${g.n}</td><td class="number ${tone(g.expectancy)}">${rfmt(g.expectancy)}<div class="subtext">${e(g.basis)}</div></td><td class="number">${pct(g.winRate)}</td><td class="number">${rfmt(g.avgW)}</td><td class="number">${rfmt(g.avgL)}</td><td>${g.nCash}/${g.n}</td></tr>`));}
+function analyticsPage(){
+  const rows=filtered().filter(t=>t.status==='closed'),s=Core.stats(rows),groups=Core.group(rows,t=>groupDimension==='compliance'?Core.compliance(t):groupDimension==='system'?SETUPS.find(x=>x.id===t.setup)?.system:t[groupDimension]);
+  const excursions=Core.group(rows,t=>t.regime).map(g=>{const hold=g.rows.filter(t=>t.excursionScope==='During hold'),mfes=hold.map(Core.calculate).map(m=>m.mfeR).filter(v=>v!==null),maes=hold.map(Core.calculate).map(m=>m.maeR).filter(v=>v!==null),winnerHeat=hold.map(Core.calculate).filter(m=>m.outcome==='W'&&m.maeR!==null).map(m=>m.maeR);return `<tr><td>${e(g.name)}</td><td>${g.n}</td><td>${mfes.length}/${g.n}</td><td class="number">${rfmt(Core.median(mfes))}</td><td>${maes.length}/${g.n}</td><td class="number">${rfmt(Core.median(maes))}</td><td class="number">${rfmt(Core.median(winnerHeat))} <span class="muted">(n=${winnerHeat.length})</span></td></tr>`;});
+  return filterBar(true)+metrics(s)+sampleNote(s)+card('Compare conditions','Descriptive results within your selected date range and strategy version.',groupTable(groups),select('Group by','groupDimension',groupDimension,[['setup','Setup'],['regime','Regime'],['compliance','Rule adherence'],['grade','Execution grade'],['pairState','Pair confirmation'],['session','Session'],['entryVsTrigger','Entry timing'],['exitReason','Exit reason'],['mistakeTag','Mistake'],['conviction','Conviction'],['trigger','0DTE trigger'],['strategyVersion','Strategy version'],['system','Setup system']]))+card('Excursions while the trade was open','Price movement in units of the original stop distance. Unknown legacy windows are excluded.',table(['Regime','Trades','MFE coverage','Median MFE','MAE coverage','Median MAE · all','Median MAE · winners'],excursions)+`<div class="callout section-gap"><strong>Research inputs, not an optimized exit rule.</strong> MFE and MAE do not reveal which came first. Winners’ heat alone cannot establish a stop. Compare predefined rules on chronological price data before drawing conclusions. Post-exit observations remain separate in each trade.</div>`)+card('Matched trades','Check the individual examples behind a pattern.',tradeTable(rows));
+}
+function weeklyPage(){
+  const end=Core.addDays(currentWeek,6),rows=S.trades.filter(t=>t.date>=currentWeek&&t.date<=end&&t.status==='closed'),s=Core.stats(rows),notes=S.weeklyReviews[currentWeek]||{};
+  const mistakes=Core.group(rows.filter(t=>t.mistakeTag&&t.mistakeTag!=='None'),t=>t.mistakeTag).sort((a,b)=>b.n-a.n);
+  const needs=rows.filter(t=>!t.grade||!t.reviewNote);
+  return `<div class="toolbar"><div><div class="eyebrow">MONDAY — SUNDAY</div><h2>${e(currentWeek)} <span class="muted">to</span> ${e(end)}</h2><p class="subtext">All strategy versions; use Research to isolate a version.</p></div><div class="row">${button('← Previous','week-prev')}${field('Week containing','weekDate',currentWeek,'date')}${button('Next →','week-next')}${button('Export review','export-week')}</div></div>`+metrics(s)+sampleNote(s)+`<div class="grid-2 equal">${card('Rules & outcomes','A compliant loss still counts as following the plan.',groupTable(Core.group(rows,Core.compliance)))}${card('Dependence on the best winner','A simple sensitivity check, not a forecast.',`<div class="metric-list"><div class="metric-row"><span>Observed expectancy</span><span class="number">${rfmt(s.expectancy)}</span></div><div class="metric-row"><span>Without the largest winning R trade</span><span class="number">${rfmt(s.withoutBest)}</span></div><div class="metric-row"><span>Trades still needing a review</span><span class="number">${needs.length}</span></div></div><p class="hint section-gap">Removing a winner is a diagnostic, not an estimate of future returns. No cost is assigned to a mistake without a defined alternative.</p>`)}</div>`+card('Repeated execution mistakes','Counts and observed outcomes; these are not estimated dollars lost.',table(['Mistake','Occurrences','Average observed R'],mistakes.map(g=>`<tr><td>${e(g.name)}</td><td>${g.n}</td><td class="number ${tone(g.expectancy)}">${rfmt(g.expectancy)}</td></tr>`)))+card('What will you carry into next week?','Keep one testable change separate from the rules you are currently trading.',`<div class="form-grid">${field('What repeated?','week.pattern',notes.pattern||'','textarea')}${field('What did I execute well?','week.strength',notes.strength||'','textarea')}${field('One hypothesis to investigate','week.hypothesis',notes.hypothesis||'','textarea',{placeholder:'For example: laggard already above 50 vs waiting for a full cross.'})}${field('Test plan & evaluation period','week.test',notes.test||'','textarea',{placeholder:'Define the comparison, sample window, and what would disprove it.'})}</div><div class="row section-gap">${button('Save review','save-week','','primary')}<span class="hint" id="week-save-state">${notes.updatedAt?'Saved '+e(new Date(notes.updatedAt).toLocaleString()):'Autosaves as you type'}</span></div>`)+(needs.length?card('Finish the review','Complete the process notes before next week.',tradeTable(needs)):'');
+}
+function opportunitiesPage(){
+  const rows=S.ghostTrades.filter(g=>(!filters.from||g.date>=filters.from)&&(!filters.to||g.date<=filters.to));
+  const cats=['Valid · hesitation','Correctly rejected','Valid · unavailable','Noticed afterwards','Unclassified (legacy)'];
+  return `<div class="toolbar"><p class="subtext">Hypothetical observations stay separate from realized results.</p>${button('+ Log skipped setup','new-ghost','','primary')}</div>`+`<div class="callout">Record the candidate before its outcome where possible. A hindsight observation is not evidence that you would have taken or held a trade. Results below are manual estimates, not broker fills.</div>`+card('Opportunity review','Grouped by reason and when the candidate was recorded.',table(['Category','Records','Before outcome','With R estimate','Mean estimated R'],cats.map(c=>{const gs=rows.filter(g=>g.category===c),rs=gs.map(g=>n(g.wouldR)).filter(x=>x!==null);return `<tr><td>${e(c)}</td><td>${gs.length}</td><td>${gs.filter(g=>g.recordTiming==='Before outcome').length}</td><td>${rs.length}</td><td class="number">${rfmt(Core.mean(rs))}</td></tr>`;})))+card('Skipped-setup log','Edit a record to add its plan, observation window, or result.',table(['Date','Setup','Category','Timing','Estimated R','Reason',''],[...rows].sort((a,b)=>b.date.localeCompare(a.date)).map(g=>`<tr><td>${e(g.date)}<div class="subtext">${e(g.instrument)} · ${e(g.direction)}</div></td><td>${e(g.setup)}</td><td>${e(g.category)}</td><td>${e(g.recordTiming)}</td><td class="number">${rfmt(n(g.wouldR))}</td><td class="wrap">${e(g.reason||g.skipReason||'—')}</td><td>${button('Edit','edit-ghost',g.id,'small')}</td></tr>`)));
+}
+function playbookPage(){
+  return `<div class="toolbar"><div class="pills">${['all','bullish','bearish','neutral','misc'].map(p=>`<button data-action="playbook-phase" data-id="${p}" class="${p===playbookPhase?'active':''}">${e(p==='all'?'All setups':p[0].toUpperCase()+p.slice(1))}</button>`).join('')}</div>${select('Observed strategy version','filter.version',filters.version,[['','All versions'],...versions(),['Legacy / unversioned','Legacy / unversioned']])}</div><div class="callout"><strong>Original playbook preserved.</strong> Its percentages and trade-management statements are inherited assumptions, not verified statistics. Observed performance below comes only from your completed trades. Use version notes to document changes to your rules.</div><div class="playbook-grid">${SETUPS.filter(s=>playbookPhase==='all'||s.phase===playbookPhase).map(setup=>{const ts=filtered().filter(t=>t.setup===setup.id),ss=Core.stats(ts),note=S.playbookOverrides[setup.id]||'';return `<section class="card"><div class="row">${chip(setup.id,'good')}${chip(setup.phase)}${chip(setup.timeframe)}</div><h3>${e(setup.name)}</h3><p>${e(setup.desc)}</p><div class="divider"></div><div class="row">${chip('Observed n = '+ss.n)}<strong class="number ${tone(ss.expectancy)}">${rfmt(ss.expectancy)} / trade</strong><span class="hint">${pct(ss.winRate)} win rate · R ${ss.nR}/${ss.n}</span></div><details><summary>Original rules & assumptions</summary><div><p>Assumed win rate: ${setup.open?'Unspecified':setup.wr+'%'} · assumed reward/risk: ${setup.open?'Unspecified':setup.rr+'×'}. These values are never used to calculate your results.</p><ul>${setup.confluences.map(c=>`<li>${e(c.text)}</li>`).join('')}</ul><p><strong>Original stop guidance:</strong> ${e(setup.stop)}</p></div></details><details><summary>Your current clarification</summary><div>${field('Clarification / exception','playbook.'+setup.id,note,'textarea')}${button('Save clarification','save-playbook',setup.id,'small')}</div></details></section>`;}).join('')}</div>`;
+}
+async function render(){
+  if(!ready)return;
+  $('#page-title').textContent=pageNames[page][0];$('#page-eyebrow').textContent=pageNames[page][1];
+  $$('[data-page]').forEach(b=>{b.classList.toggle('active',b.dataset.page===page);if(b.dataset.page===page)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+  $('#footer-count').textContent=S.trades.length+' trades · '+S.ghostTrades.length+' skipped setups';
+  const fn={dashboard,trades:tradesPage,analytics:analyticsPage,weekly:weeklyPage,opportunities:opportunitiesPage,playbook:playbookPage,journal:journalPage,data:dataPage}[page];
+  const target=page,content=await fn();if(target!==page)return;$('#main').innerHTML=content;
+  if(page==='journal'){await Store.hydrate($('#main'));noteDirty=false;}
+  await Store.hydrate($('#main'));
+}
+async function goPage(next){if(!pageNames[next])return;await flushNotes();page=next;await render();window.scrollTo({top:0,behavior:'instant'});}
+
+function journalPage(){
+  const first=calendarMonth+'-01',start=(new Date(first+'T12:00:00Z').getUTCDay()+6)%7,last=new Date(Number(calendarMonth.slice(0,4)),Number(calendarMonth.slice(5,7)),0).getDate(),today=Core.dateInZone(new Date(),S.settings.timezone);
+  let days=Array.from({length:start},()=>'<span></span>').join('');
+  for(let d=1;d<=last;d++){const date=calendarMonth+'-'+String(d).padStart(2,'0'),ts=S.trades.filter(t=>t.date===date&&t.status==='closed'),s=Core.stats(ts),assessed=ts.filter(t=>Core.compliance(t)!=='Not assessed'),passed=assessed.filter(t=>Core.compliance(t)==='Passed').length;
+    days+=`<button data-action="journal-day" data-id="${date}" class="${date===journalDate?'selected':''} ${date===today?'today':''}" aria-label="${date}, ${ts.length} trades, ${rfmt(s.totalR)}, ${passed} of ${assessed.length} assessed passed"><span>${d}</span>${s.totalR!==null?`<span class="day-r number ${tone(s.totalR)}">${s.totalR>0?'+':''}${fmt(s.totalR,1)}R</span>`:''}${ts.length?`<span class="day-n">${ts.length}t · ${passed}/${assessed.length}✓</span>`:''}${S.dayNotes[date]?'<span class="note-dot"></span>':''}</button>`;
+  }
+  const dayTrades=S.trades.filter(t=>t.date===journalDate),s=Core.stats(dayTrades);
+  return `<div class="calendar-layout"><aside>${card('Trading calendar','R · trade count · passed / assessed',`<div class="row" style="justify-content:space-between;margin-bottom:14px">${button('←','month-prev','','small')}<strong>${e(new Date(first+'T12:00:00Z').toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'}))}</strong>${button('→','month-next','','small')}</div><div class="calendar">${['M','T','W','T','F','S','S'].map(d=>`<span class="weekday">${d}</span>`).join('')}${days}</div><div class="row section-gap">${button('Today','journal-today','','small')}${button('Data & settings','page','data','small')}</div><p class="hint section-gap">A dot marks a day with notes. Missing risk stays unmeasured.</p>`)}</aside><section>${card(journalDate,'Plan, review, and keep the chart context together.',`<div class="row" style="margin-bottom:18px">${chip(dayTrades.length+' trades')}${chip(rfmt(s.totalR),s.totalR>0?'good':s.totalR<0?'bad':'')}<span class="hint" id="note-save-state">Autosaves as you type</span></div><div class="note-editor" id="note-editor" contenteditable="true" role="textbox" aria-label="Daily journal notes" aria-multiline="true" data-placeholder="What is your read on the market? Your plan, key levels, and one lesson from the session… Paste charts here.">${Store.cleanHTML(S.dayNotes[journalDate]||'')}</div><div class="row section-gap">${button('Save note','save-note','','primary')}${button('+ Add chart','note-image')}${button('Clear day note','clear-note','','danger')}<input id="note-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden multiple></div>`)}${card('Trades this day','Original plans and post-trade reviews.',tradeTable(dayTrades))}</section></div>`;
+}
+async function flushNotes(){
+  clearTimeout(noteTimer);clearTimeout(weekTimer);
+  if(noteDirty&&$('#note-editor')){
+    const date=journalDate,generation=noteGeneration,html=Store.cleanHTML($('#note-editor').innerHTML);await mutate('Edited daily note '+date,s=>{if(html.replace(/<[^>]+>/g,'').trim()||html.includes('<img'))s.dayNotes[date]=html;else delete s.dayNotes[date];});noteDirty=generation!==noteGeneration;if($('#note-save-state'))$('#note-save-state').textContent=noteDirty?'Saving…':'Saved';
+  }
+  if(weekDirty&&page==='weekly'){
+    const notes={},week=currentWeek,generation=weekGeneration;for(const el of $$('[name^="week."]'))notes[el.name.slice(5)]=el.value;
+    await mutate('Edited weekly review '+week,s=>{s.weeklyReviews[week]={...notes,updatedAt:new Date().toISOString()};});weekDirty=generation!==weekGeneration;if($('#week-save-state'))$('#week-save-state').textContent=weekDirty?'Saving…':'Saved';
+  }
+}
+async function compressImage(file){
+  if(file.size>25*1024*1024)throw Error('Please use images smaller than 25 MB.');
+  if(!/^image\/(png|jpeg|webp|gif)$/.test(file.type))throw Error('Use PNG, JPEG, WebP, or GIF.');
+  const src=URL.createObjectURL(file);try{const im=new Image();await new Promise((resolve,reject)=>{im.onload=resolve;im.onerror=()=>reject(Error('Could not open this image.'));im.src=src;});const ratio=Math.min(1,2200/im.width,1600/im.height),canvas=document.createElement('canvas');canvas.width=Math.round(im.width*ratio);canvas.height=Math.round(im.height*ratio);const ctx=canvas.getContext('2d');ctx.fillStyle='white';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(im,0,0,canvas.width,canvas.height);return await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error('Could not prepare screenshot.')),'image/jpeg',.88));}finally{URL.revokeObjectURL(src);}
+}
+async function addNoteImages(files){for(const f of files){const id=await Store.addBlob(await compressImage(f));const img=document.createElement('img');img.dataset.media=id;img.alt='Journal chart';img.src=await Store.mediaURL(id);$('#note-editor').append(img,document.createElement('br'));}noteDirty=true;noteGeneration++;await flushNotes();}
+async function dataPage(){
+  const snapshots=await Store.snapshots();
+  return `<div class="callout ${S.settings.lastBackup?'':'warn'}"><strong>${S.settings.lastBackup?'Last exported backup: '+e(new Date(S.settings.lastBackup).toLocaleString()):'Export a JSON backup before moving or replacing this HTML.'}</strong> The HTML contains the app, not your trading records. Browser snapshots help undo changes, but clearing browser data removes them. Full JSON backups include screenshots, notes, reviews, and deleted records.</div><div class="data-actions">${card('Bring your history','',`<p>Import earlier journal backups without inventing missing fees or position sizes. Preview before merging or replacing.</p>${button('Import JSON backup','import-json','','primary')}`)}${card('Take your work with you','',`<p>Full JSON preserves everything. CSV exports the selected trades and embeds each complete trade record; screenshots remain in JSON.</p><div class="row">${button('Full JSON backup','backup','','primary')}${button('Trades CSV','export-csv')}${button('Monthly CSV','export-monthly')}${button('Markdown summary','export-markdown')}</div>`)}${card('Broker / spreadsheet import','',`<p>Map CSV columns for completed trades. Each row is one round trip; review duplicate candidates before importing. Raw order logs must be grouped into trades first.</p><div class="row">${button('Import CSV','import-csv','','primary')}${button('Get CSV template','csv-template')}</div>`)}</div>`+card('Defaults','Time zone applies to new records. Existing trades keep their own time zone.',`<div class="form-grid three">${select('Trading time zone','settings.timezone',S.settings.timezone,['America/New_York','Europe/Zagreb','UTC'])}${select('Default strategy version','settings.defaultVersion',S.settings.defaultVersion,versions())}<div class="field"><span>Save defaults</span>${button('Save settings','save-settings','','primary')}</div></div>`)+card('Strategy versions','Keep changed rules separate. Old trades retain their original version.',table(['Version','Name','Created','Rule notes'],S.strategyVersions.map(v=>`<tr><td>${e(v.id)}</td><td>${e(v.name)}</td><td>${e(v.createdAt?.slice(0,10)||'—')}</td><td class="wrap">${e(v.notes||'—')}</td></tr>`))+`<details><summary>+ Add a version</summary><div class="form-grid">${field('Version ID','newVersion.id','','text',{placeholder:'v2'})}${field('Name','newVersion.name','','text',{placeholder:'Updated confirmation rules'})}${field('What changed?','newVersion.notes','','textarea',{full:true})}<div>${button('Create version','new-version','','primary')}</div></div></details>`)+card('Automatic recovery points','The 30 most recent states before saved changes. Restoring also preserves your current state.',snapshots.length?snapshots.map(x=>`<div class="snapshot-row"><div><strong>${e(new Date(x.at).toLocaleString())}</strong><div class="hint">Before: ${e(x.reason)} · ${x.state.trades.length} trades</div></div>${button('Restore','restore-snapshot',x.id,'small')}</div>`).join(''):'<p class="muted">Recovery points appear as you save changes.</p>')+card('Recently deleted','Deleted records remain here until restored; they are included in full backups.',S.trash.length?table(['Deleted','Record','Type',''],S.trash.map(x=>`<tr><td>${e(x.deletedAt.slice(0,10))}</td><td>${e(x.record.date)} · ${e(x.record.setup||x.record.instrument)}</td><td>${e(x.kind)}</td><td>${button('Restore','restore-trash',x.id,'small')}</td></tr>`)):'<p class="muted">Nothing deleted.</p>')+card('How the measurements work','One calculation model across dashboards, research, and exports.',`<div class="prewrap">R = trade result ÷ initial recorded risk. Fill-based records use net dollars when costs are entered, and gross dollars when costs are unknown. Legacy point-only trades use signed points ÷ original stop distance. Missing values remain unknown.
+
+Dollar results use recorded contract quantity and point value (defaults: ES $50, NQ $20, MES $5, MNQ $2 per point). Partial exits are weighted by quantity. Multiple entry fills use average cost and must all occur before exits; split re-entry / position-reversal sequences into separate trades.
+
+The initial dollar risk is recorded explicitly and retained in the original plan. Changing it creates a visible revision. Default stop-based risk excludes fees; realized net R includes recorded costs. Planned and open positions are excluded from performance summaries.
+
+Win rate excludes breakevens. Winners and losers are determined from actual recorded P&L, after fees when known; a legacy manual “BE” label is retained in the record but does not override a non-zero measured result. Dates group trades by their recorded trading date. All figures are USD where dollars are shown.
+
+Snapshots and screenshots use browser storage. This file does not connect to a broker or market-data feed. CSV import accepts completed round trips; hypothetical exits are not backtested without chronological market data.</div>`);
+}
+
+const planKeys=['date','instrument','direction','setup','strategyVersion','account','phase','regime','session','leader','pairState','conviction','plannedEntry','plannedTarget','stopDist','initialRiskDollars','pointValue','thesis','trigger','signalUnderlying','signalSide','signalExpiry','signalStrike','signalTimeframe','premiumAtCross','obstacle','obstacleDistance','context','gateRegime','gates','sTier','planTiming','timezone'];
+function planOf(t){return Object.fromEntries(planKeys.map(k=>[k,t[k]??null]));}
+function captureDraft(){
+  if(!draft)return;
+  const fd=new FormData($('#trade-form'));for(const [k,v]of fd){if(k.startsWith('ctx.')||k.startsWith('gate.')||k.startsWith('fill.'))continue;draft[k]=v;}
+  for(const [k,v]of fd){const p=k.split('.');if(p[0]==='ctx'){draft.context[+p[1]][p[2]]=v;}if(p[0]==='gate')draft.gates[p[1]]=v;if(p[0]==='fill')draft[p[1]][+p[2]][p[3]]=v;}
+  draft.sTier=fd.get('sTier')==='on';
+}
+function openTrade(id=null,tab='plan'){
+  const existing=id?S.trades.find(t=>t.id===id):null;editingId=existing?.id||null;
+  draft=existing?Core.clone(existing):{id:Core.uid(),date:Core.dateInZone(new Date(),S.settings.timezone),instrument:'ES',direction:'Long',status:'closed',accountingMode:'fills',setup:'',strategyVersion:S.settings.defaultVersion,timezone:S.settings.timezone,entries:[{qty:'',price:'',time:''}],exits:[{qty:'',price:'',time:''}],fees:null,pointValue:50,context:[],gates:{},gateRegime:'unknown',images:[],revisions:[],planTiming:'Reconstructed after entry',excursionScope:'During hold'};
+  editTab=tab;draftDirty=false;renderEditor();$('#editor').showModal();
+}
+function tradePlanHTML(){const t=draft;return `<div class="callout ${t.originalPlan?'':'warn'}">${t.originalPlan?`<strong>Original plan captured ${e(new Date(t.originalPlan.at).toLocaleString())}.</strong> ${e(t.originalPlan.timing)}. Changes are saved as revisions; the first snapshot is retained.`:'Save a planned trade before entry to capture your original thesis. Completed trades entered later are labelled reconstructed.'}</div><div class="form-grid three">${field('Trading date','date',t.date,'date',{required:true})}${select('Instrument','instrument',t.instrument,Object.keys(Core.POINT_VALUES))}${select('Status','status',t.status,[['planned','Planned · not entered'],['open','Open position'],['closed','Closed trade']])}${select('Direction','direction',t.direction,['Long','Short'])}${select('Strategy version','strategyVersion',t.strategyVersion,versions())}${field('Account / prop account','account',t.account||'')}</div><div class="form-grid section-gap">${select('Setup','setup',t.setup,[['','Unassigned'],...setups()],{full:true})}${select('Plan recorded','planTiming',t.planTiming,['Before entry','Reconstructed after entry','Unknown (legacy)'])}${select('Conviction at entry','conviction',t.conviction,[unknown,['A+','A+ · textbook'],['B','B · decent'],['C','C · marginal']])}${field('Planned entry price','plannedEntry',t.plannedEntry,'number')}${field('Initial stop distance · pts','stopDist',t.stopDist,'number',{min:0})}${field('Planned target distance · pts','plannedTarget',t.plannedTarget,'number',{min:0})}${field('Initial risk · USD','initialRiskDollars',t.initialRiskDollars,'number',{min:0,hint:'Fixed denominator for fill-based R; retain the original risk after taking partials.'})}<div class="full row">${button('Calculate risk from entry fills & stop','estimate-risk','','small')}<span class="hint">Contracts × original stop distance × point value.</span></div>${field('Entry thesis & invalidation','thesis',t.thesis||'','textarea',{full:true,placeholder:'What must align? What would invalidate the trade?'})}</div><div class="form-section">Market & 0DTE signal</div><div class="form-grid three">${select('Market phase','phase',t.phase,[unknown,'Bullish','Bearish','Neutral'])}${select('Regime at entry','regime',t.regime,[unknown,'Trend','Chop','Unclear'])}${select('Session','session',t.session,sessions)}${select('Leader','leader',t.leader,[unknown,'SPY','QQQ'])}${select('Laggard state','pairState',t.pairState,[unknown,['Confirmed','Also crossed'],['Above50','Above 50, not crossed'],['Below50','Below 50']])}${select('0DTE trigger','trigger',t.trigger,[unknown,'Positive call cross','Negative put cross','Call 50 bounce','Put 50 reject','Positive put cross','Negative call cross','Put 50 bounce','Call 50 reject','Other'])}</div><details ${t.context.length?'open':''}><summary>Option contracts & multi-timeframe context</summary><div><div class="form-grid three">${select('Signal underlying','signalUnderlying',t.signalUnderlying,[unknown,'SPY','QQQ'])}${select('Signal option side','signalSide',t.signalSide,[unknown,'Call','Put'])}${field('Signal expiry','signalExpiry',t.signalExpiry,'date')}${field('Signal strike','signalStrike',t.signalStrike,'number')}${select('Signal chart timeframe','signalTimeframe',t.signalTimeframe,[unknown,'1m','5m','15m','30m'])}${field('Premium at cross','premiumAtCross',t.premiumAtCross,'number')}</div><div class="form-section">HTF context · add the relevant rows only</div><div class="row">${button('+ Add context row','add-context','','small')}${button('Preset: calls at 30m 50 + put reject','context-preset','','small')}</div><p class="hint" style="margin-top:8px">Preset fills context only; it does not certify a valid setup. Specify the actual expiry and strike.</p>${t.context.map((c,i)=>contextEditor(c,i)).join('')}<div class="form-grid">${field('Opposing structure / obstacle','obstacle',t.obstacle||'')}${field('Distance to obstacle · futures pts','obstacleDistance',t.obstacleDistance,'number',{min:0})}</div></div></details><div class="form-section">Entry checklist · your existing rules</div>${select('HTF trend','gateRegime',t.gateRegime,[['unknown','Not assessed'],['htf','HTF trend present'],['notrend','No HTF trend']])}<div id="gate-fields">${gateFields()}</div><label class="row section-gap"><input type="checkbox" name="sTier" ${t.sTier?'checked':''}> <span>S-tier · HTF structure directly matches 0DTE</span></label><p class="hint">Not applicable is explicit. A failed gate remains visible and never prevents you from journaling a real trade.</p>`;}
+function gateFields(){const list=Core.GATES[draft.gateRegime]||[];return list.length?list.map(([k,label])=>`<label class="gate-row"><span>${e(label)}</span><select name="gate.${k}">${[['unknown','Not assessed'],['pass','Passed'],['fail','Failed'],['na','Not applicable']].map(([v,l])=>`<option value="${v}" ${(draft.gates[k]||'unknown')===v?'selected':''}>${l}</option>`).join('')}</select></label>`).join(''):'<p class="hint section-gap">Choose the trend context to assess its checklist.</p>';}
+function contextEditor(c,i){return `<div class="context-card"><div class="row"><strong>Context ${i+1}</strong>${button('Remove','remove-context',i,'small danger')}</div><div class="form-grid three">${select('Chart timeframe',`ctx.${i}.timeframe`,c.timeframe,[unknown,'30m','1h','4h'])}${select('Underlying',`ctx.${i}.underlying`,c.underlying,[unknown,'SPY','QQQ'])}${select('Option side',`ctx.${i}.optionSide`,c.optionSide,[unknown,'Call','Put'])}${field('Expiry',`ctx.${i}.expiry`,c.expiry,'date')}${field('Strike',`ctx.${i}.strike`,c.strike,'number')}${select('10 vs 50 cross',`ctx.${i}.cross`,c.cross,[unknown,'Positive','Negative','Uncrossed'])}${select('Price relative to 50',`ctx.${i}.position`,c.position,[unknown,'Above','At','Below'])}${select('50 SMA slope',`ctx.${i}.slope`,c.slope,[unknown,'Up','Flat','Down'])}${select('Interaction',`ctx.${i}.interaction`,c.interaction,[unknown,'Bounce','Rejection','Reclaim','Extension','None'])}</div></div>`;}
+function fillEditor(side){return `<div class="card" style="padding:15px;margin:15px 0"><div class="row" style="justify-content:space-between"><h4>${side==='entries'?'Entry fills':'Exit fills / partials'}</h4>${button('+ Fill','add-fill',side,'small')}</div>${draft[side].map((f,i)=>`<div class="fill-row">${field('Contracts',`fill.${side}.${i}.qty`,f.qty,'number',{min:1,step:1})}${field('Price',`fill.${side}.${i}.price`,f.price,'number',{min:0})}${field('Local timestamp',`fill.${side}.${i}.time`,f.time||'','datetime-local')}<button type="button" class="icon-button" data-action="remove-fill" data-id="${side}.${i}" aria-label="Remove ${side==='entries'?'entry':'exit'} fill ${i+1}">×</button></div>`).join('')}</div>`;}
+function tradeExecutionHTML(){const t=draft;return `<div class="form-grid">${select('Accounting','accountingMode',t.accountingMode,[['fills','Contract fills · net dollars & R'],['points','Point-only · gross R']])}${select('Time zone for timestamps','timezone',t.timezone||S.settings.timezone,['America/New_York','Europe/Zagreb','UTC'])}</div><div class="callout section-gap">${t.accountingMode==='fills'?'Each exit is weighted by contracts. Record total round-trip fees; leave blank if unknown. Enter the original dollar risk on the Plan tab. All entry fills must precede exits; split re-entries into separate records.':'Point-only mode preserves older trades without inventing size or costs. Results are gross R; net dollars remain unknown.'}</div>${t.accountingMode==='fills'?`${fillEditor('entries')}${fillEditor('exits')}<div class="form-grid">${field('USD per point / contract','pointValue',t.pointValue,'number',{min:0})}${field('Total commissions & fees · USD','fees',t.fees,'number',{min:0,hint:'Enter 0 only when costs were actually zero.'})}</div>`:`<div class="form-grid">${field('Entry price','entry',t.entry,'number')}${field('Exit price','exit',t.exit,'number')}${field('Entry timestamp','entryTime',t.entryTime||'','datetime-local')}${field('Exit timestamp','exitTime',t.exitTime||'','datetime-local')}</div>${n(t.pnl)!==null&&n(t.entry)===null?`<p class="hint section-gap">Imported point result: ${fmt(t.pnl)} pts. Fill both prices to replace this result.</p>`:''}`}<div class="form-section">Execution result</div><div id="execution-preview">${executionPreview()}</div><div class="form-grid section-gap">${select('Entry vs trigger','entryVsTrigger',t.entryVsTrigger,[unknown,'On-trigger','Late','Anticipated'])}${select('Exit reason','exitReason',t.exitReason,[unknown,'Target hit','Trailed out','Stopped','Time/EOD','Early profit','Fear/bail','Better signal'])}</div>`;}
+function executionPreview(){const m=Core.calculate(draft);return `<div class="form-grid three"><div><span class="hint">Weighted point result</span><div class="number">${fmt(m.pnl)} pts</div></div><div><span class="hint">Net result / R</span><div class="number ${tone(m.net)}">${money(m.net)} · ${rfmt(m.r)}</div></div><div><span class="hint">Fill balance</span><div class="number">${m.qty===null?'—':m.exitQty+' / '+m.qty+' closed'}</div></div></div>${m.error?`<p class="hint negative section-gap">${e(m.error)}. Plans can be saved before fills are known.</p>`:''}`;}
+function tradeReviewHTML(){const t=draft;return `<div class="callout">Grade the decision using information available at entry. A well-executed loss can receive an A.</div><div class="form-grid">${select('Execution grade','grade',t.grade,[unknown,['A','A · followed the plan'],['B','B · minor deviation'],['C','C · off-plan / improvised']])}${select('Would repeat with entry-time information?','wouldRepeat',t.wouldRepeat,[unknown,'Yes','No'])}${select('Mistake','mistakeTag',t.mistakeTag,[unknown,'None','Moved stop','Cut winner early','Let loser run','Oversize','Revenge','FOMO chase','Ignored regime'])}${select('Mental state','state',t.state,[unknown,'Calm','Hesitant','FOMO','Frustrated','Bored'])}${field('Review & lesson','reviewNote',t.reviewNote||'','textarea',{full:true})}${field('Trade notes / original comment','comment',t.comment||'','textarea',{full:true})}</div><details><summary>Excursions & post-exit observations</summary><div class="form-grid">${select('MFE / MAE observation window','excursionScope',t.excursionScope,['During hold','Unknown (legacy)'])}<div></div>${field('MFE while held · pts from entry','mfe',t.mfe,'number',{min:0})}${field('MAE while held · pts from entry','mae',t.mae,'number',{min:0})}<div class="full callout">Use positive distances from the average entry, from first entry until final exit. These extremes do not reveal target/stop order. Legacy values retain an unknown window until you verify it.</div>${select('Fixed period after final exit','observationMinutes',t.observationMinutes,[unknown,['15','15 minutes'],['30','30 minutes'],['60','60 minutes']])}${field('Observation notes / data source','observationNote',t.observationNote||'')}${field('Favorable move after exit · pts','afterMfe',t.afterMfe,'number',{min:0})}${field('Adverse move after exit · pts','afterMae',t.afterMae,'number',{min:0})}<p class="hint full">Post-exit distances start at the final exit fill price, not the entry. They are recorded observations, not hypothetical realized P&L.</p></div></details>`;}
+function chartsHTML(){return `<div class="callout">Label each chart by its role. Paste, drag, or add screenshots. Images are included in full JSON backups.</div><div class="dropzone" id="trade-drop">${button('+ Add screenshots','trade-image','','primary')}<p class="hint" style="margin-top:10px">PNG · JPEG · WebP · GIF · paste with Ctrl+V</p><input id="trade-image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden multiple></div><div class="images-grid">${draft.images.map((im,i)=>`<div class="image-card"><img data-media="${e(im.id)}" alt="${e(im.label||'Unlabelled')} chart" data-action="zoom" data-id="${e(im.id)}"><div class="row"><select data-image-index="${i}" aria-label="Screenshot ${i+1} role">${['Unlabelled','Context','Entry','Exit','Review'].map(l=>`<option ${im.label===l?'selected':''}>${l}</option>`).join('')}</select><button type="button" class="icon-button" data-action="remove-image" data-id="${i}" aria-label="Remove screenshot ${i+1}">×</button></div></div>`).join('')}</div>`;}
+function renderEditor(){
+  $('#editor-title').textContent=editingId?'Edit trade':'Log a trade';$('#form-feedback').textContent='';
+  $('#trade-editor-body').innerHTML=`<div class="form-tabs" role="tablist">${[['plan','01 · Plan'],['execution','02 · Execution'],['review','03 · Review'],['charts','Charts']].map(([id,l])=>`<button type="button" role="tab" aria-selected="${editTab===id}" aria-controls="tab-${id}" id="tab-button-${id}" data-action="edit-tab" data-id="${id}" class="${editTab===id?'active':''}">${l}</button>`).join('')}</div>${[['plan',tradePlanHTML],['execution',tradeExecutionHTML],['review',tradeReviewHTML],['charts',chartsHTML]].map(([id,fn])=>`<div class="tab-panel" id="tab-${id}" role="tabpanel" aria-labelledby="tab-button-${id}" ${editTab===id?'':'hidden'}>${fn()}</div>`).join('')}`;
+  Store.hydrate($('#editor')).catch(err=>toast(err.message));
+}
+async function addTradeImages(files){captureDraft();for(const file of files)draft.images.push({id:await Store.addBlob(await compressImage(file)),label:editTab==='plan'?'Context':editTab==='review'?'Review':'Unlabelled'});draftDirty=true;renderEditor();}
+function validateTrade(t){
+  if(!Core.validDate(t.date))throw Error('Enter a valid trading date on the Plan tab.');
+  if(!['Long','Short'].includes(t.direction))throw Error('Choose Long or Short.');
+  for(const k of ['stopDist','plannedTarget','initialRiskDollars','pointValue','fees','mfe','mae','afterMfe','afterMae','obstacleDistance']){if(n(t[k])!==null&&n(t[k])<0)throw Error(k+' cannot be negative.');}
+  if(n(t.initialRiskDollars)===0)throw Error('Initial dollar risk must be positive or left blank.');
+  if(n(t.stopDist)===0)throw Error('Stop distance must be positive or left blank.');
+  if((n(t.afterMfe)!==null||n(t.afterMae)!==null)&&!n(t.observationMinutes))throw Error('Choose a fixed post-exit observation period.');
+  if(t.sTier&&Core.compliance(t)!=='Passed')throw Error('S-tier needs a completed checklist with no failed gates. Untick S-tier to record an incomplete or rule-breaking trade.');
+  if(t.accountingMode==='fills'){
+    t.entries=t.entries.filter(f=>n(f.qty)!==null||n(f.price)!==null||f.time);
+    t.exits=t.exits.filter(f=>n(f.qty)!==null||n(f.price)!==null||f.time);
+    for(const f of [...t.entries,...t.exits]){if(!(f.qty>0&&Number.isInteger(f.qty)&&f.price>0))throw Error('Each fill needs a positive integer quantity and positive price.');f.at=f.time?Core.wallToISO(f.time,t.timezone):null;}
+    if(!(n(t.pointValue)>0))throw Error('Point value must be positive.');
+    if(t.status==='planned'&&(t.entries.length||t.exits.length))throw Error('Use Open or Closed for a record with fills.');
+    if(t.status!=='planned'){
+      const m=Core.calculate(t);if(m.error)throw Error(m.error+'. Check your entry and exit contracts.');
+      if(t.status==='open'&&m.qty===m.exitQty)throw Error('All contracts are closed. Change status to Closed.');
+    }
+    const entries=t.entries.filter(f=>f.at).map(f=>f.at).sort(),exits=t.exits.filter(f=>f.at).map(f=>f.at).sort();
+    if(entries.length&&exits.length&&entries.at(-1)>exits[0])throw Error('All entry fills must precede exits. Split re-entries into separate trades.');
+    t.entryAt=entries[0]||null;t.exitAt=exits.at(-1)||null;
+  }else{
+    if((n(t.entry)===null)!==(n(t.exit)===null)&&t.status==='closed')throw Error('Enter both entry and exit prices for a closed point-only trade.');
+    if(t.status==='closed'&&n(t.pnl)===null&&(n(t.entry)===null||n(t.exit)===null))throw Error('Enter entry and exit prices on the Execution tab.');
+    t.entryAt=t.entryTime?Core.wallToISO(t.entryTime,t.timezone):null;t.exitAt=t.exitTime?Core.wallToISO(t.exitTime,t.timezone):null;
+    if(t.entryAt&&t.exitAt&&t.entryAt>t.exitAt)throw Error('Exit time must follow entry time.');
+  }
+  if(t.planTiming==='Before entry'&&!t.originalPlan&&t.status!=='planned')throw Error('Save a Planned trade before entry, or label this plan Reconstructed after entry.');
+  if(t.originalPlan?.timing!=='Before entry'&&t.originalPlan&&t.planTiming==='Before entry')throw Error('This plan was not first captured before entry. Keep the original timing classification.');
+  if(t.originalPlan?.timing==='Before entry'&&t.entryAt&&t.originalPlan.at>t.entryAt)throw Error('The entered fill time predates this plan snapshot. Label the plan Reconstructed after entry to correct the timing.');
+}
+async function saveTrade(ev){ev.preventDefault();captureDraft();const btn=$('#save-trade');btn.disabled=true;try{
+  const t=Core.normalizeTrade(draft);for(const k of ['signalStrike','obstacleDistance'])t[k]=n(t[k]);t.timezone=t.timezone||S.settings.timezone;validateTrade(t);
+  const now=new Date().toISOString(),old=editingId?S.trades.find(x=>x.id===editingId):null,p=planOf(t);
+  t.createdAt=old?.createdAt||now;t.updatedAt=now;
+  if(!t.originalPlan)t.originalPlan={at:now,timing:t.planTiming,values:Core.clone(p)};
+  else if(old&&JSON.stringify(planOf(old))!==JSON.stringify(p))t.revisions.push({at:now,kind:'Plan edited',previous:planOf(old),next:Core.clone(p)});
+  if(old&&JSON.stringify([old.entries,old.exits,old.entry,old.exit,old.fees])!==JSON.stringify([t.entries,t.exits,t.entry,t.exit,t.fees]))t.revisions.push({at:now,kind:'Execution corrected',previous:{entries:old.entries,exits:old.exits,entry:old.entry,exit:old.exit,fees:old.fees}});
+  if(old?.outcome)t.legacyOutcome=old.legacyOutcome||old.outcome;
+  const m=Core.calculate(t);t.pnl=m.pnl;t.outcome=m.outcome;t.rr=m.r===null?null:Math.abs(m.r);t.gatesPassed=Core.compliance(t)==='Passed'?true:Core.compliance(t)==='Violation'?false:null;t.htfTrend=t.gateRegime==='htf'?true:t.gateRegime==='notrend'?false:null;t.setupTier=t.sTier?'S':Core.compliance(t)==='Passed'?'Valid':Core.compliance(t)==='Violation'?'Violation':null;
+  await mutate(old?'Edited trade':'Added trade',s=>{const i=s.trades.findIndex(x=>x.id===t.id);if(i<0)s.trades.push(t);else s.trades[i]=t;});draftDirty=false;$('#editor').close();draft=null;await render();toast(old?'Trade updated; original plan retained.':'Trade saved.');
+  }catch(err){$('#form-feedback').textContent=err.message;}finally{btn.disabled=false;}
+}
+
+function detailField(label,value){return `<div><div class="label">${e(label)}</div><div class="value">${e(value??'—')}</div></div>`;}
+async function openDetail(id){
+  const t=S.trades.find(x=>x.id===id);if(!t)return;const m=Core.calculate(t),comp=Core.compliance(t);$('#detail-title').textContent=t.instrument+' · '+t.date;
+  const duration=t.entryAt&&t.exitAt?(Date.parse(t.exitAt)-Date.parse(t.entryAt))/60000:null;
+  $('#detail-body').innerHTML=`<div class="row">${chip(t.direction)}${chip(t.status)}${chip(comp,comp==='Passed'?'good':comp==='Violation'?'bad':'')}${chip(t.strategyVersion)}${t.sTier?chip('S-tier','good'):''}</div><h2 style="margin:18px 0">${e(setupName(t.setup))}</h2><div class="stats-grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">${stat('Result',rfmt(m.r),m.basis)}${stat('Net dollars',money(m.net),m.net===null?'Costs / quantity not recorded':'After recorded costs')}${stat('Point result',fmt(m.pnl),t.accountingMode==='fills'?'Quantity-weighted':'Gross points')}</div><div class="detail-grid">${[['Entry',fmt(m.entry)],['Exit',fmt(m.exit)],['Initial stop',n(t.stopDist)!==null?fmt(n(t.stopDist))+' pts':'—'],['Initial dollar risk',money(n(t.initialRiskDollars))],['Quantity',m.qty],['Fees',money(n(t.fees))],['Account',t.account||'—'],['Entry timestamp',t.entryAt||t.entryTime||'—'],['Exit timestamp',t.exitAt||t.exitTime||'—'],['Time zone',t.timezone||'Unknown'],['Holding duration',duration!==null?fmt(duration,1)+' min':'—'],['Regime',t.regime||'—'],['Conviction',t.conviction||'—'],['Grade',t.grade||'—'],['Entry timing',t.entryVsTrigger||'—'],['Exit reason',t.exitReason||'—'],['Pair confirmation',t.pairState||'—'],['0DTE trigger',t.trigger||'—'],['Repeat?',t.wouldRepeat||'—'],['Mistake',t.mistakeTag||'—'],['Mental state',t.state||'—']].map(([l,v])=>detailField(l,v)).join('')}</div>${t.legacyOutcome&&t.legacyOutcome!==m.outcome?`<div class="callout">Original label ${e(t.legacyOutcome)} retained. Measured outcome ${e(m.outcome)} is based on actual recorded P&L.</div>`:''}${t.thesis?card('Entry thesis','',`<div class="prewrap">${e(t.thesis)}</div>`):''}${t.context.length?card('HTF context','',table(['TF','Contract','Cross','Price vs 50','Slope','Interaction'],t.context.map(c=>`<tr><td>${e(c.timeframe||'—')}</td><td>${e([c.underlying,c.optionSide,c.strike,c.expiry].filter(Boolean).join(' '))}</td><td>${e(c.cross||'—')}</td><td>${e(c.position||'—')}</td><td>${e(c.slope||'—')}</td><td>${e(c.interaction||'—')}</td></tr>`))):''}${t.accountingMode==='fills'?card('Execution fills','Average-cost accounting; entries precede exits.',table(['Side','Contracts','Price','Timestamp'],[...t.entries.map(f=>({...f,side:'Entry'})),...t.exits.map(f=>({...f,side:'Exit'}))].map(f=>`<tr><td>${f.side}</td><td>${f.qty}</td><td>${fmt(f.price)}</td><td>${e(f.time||'Not recorded')}</td></tr>`))):''}${card('Review & notes','',`<div class="prewrap">${e([t.reviewNote,t.comment].filter(Boolean).join('\n\n')||'No review yet.')}</div>`)}${card('Excursions & observations',t.excursionScope,`<div class="detail-grid">${detailField('MFE / MAE from entry',`${n(t.mfe)===null?'—':fmt(n(t.mfe))} / ${n(t.mae)===null?'—':fmt(n(t.mae))} pts`)}${detailField('After exit: favorable / adverse',`${n(t.afterMfe)===null?'—':fmt(n(t.afterMfe))} / ${n(t.afterMae)===null?'—':fmt(n(t.afterMae))} pts`)}${detailField('Post-exit window',n(t.observationMinutes)?t.observationMinutes+' minutes':'Not recorded')}</div><p class="hint">${e(t.observationNote||'Post-exit moves are not realized returns.')}</p>`)}${t.images.length?card('Charts','',`<div class="images-grid">${t.images.map(im=>`<div class="image-card"><img data-media="${e(im.id)}" data-action="zoom" data-id="${e(im.id)}" alt="${e(im.label)} screenshot"><div class="row">${chip(im.label)}</div></div>`).join('')}</div>`):''}<details><summary>Original plan & revision history · ${t.revisions.length} revisions</summary><div>${t.originalPlan?`<p class="hint">First captured ${e(new Date(t.originalPlan.at).toLocaleString())} · ${e(t.originalPlan.timing)}</p><pre class="prewrap">${e(JSON.stringify(t.originalPlan.values,null,2))}</pre>`:'<p class="hint">Legacy record: no original entry-time snapshot exists. The first new snapshot will be labelled with its actual recording time.</p>'}${t.revisions.map(rev=>`<details><summary>${e(rev.at)} · ${e(rev.kind)}</summary><pre class="prewrap">${e(JSON.stringify(rev,null,2))}</pre></details>`).join('')}</div></details><div class="row section-gap">${button('Edit trade','edit-trade',t.id,'primary')}${button('Review execution','review-trade',t.id)}${button('Move to deleted','delete-trade',t.id,'danger')}</div>`;
+  $('#detail').showModal();await Store.hydrate($('#detail'));
+}
+function openGhost(id=null){
+  ghostDraft=id?Core.clone(S.ghostTrades.find(x=>x.id===id)):{id:Core.uid(),date:Core.dateInZone(new Date(),S.settings.timezone),instrument:'ES',direction:'Long',category:'Valid · hesitation',recordTiming:'After outcome',timezone:S.settings.timezone,revisions:[]};ghostDirty=false;const g=ghostDraft;
+  $('#ghost-title').textContent=id?'Edit skipped setup':'Log skipped setup';$('#ghost-feedback').textContent='';
+  $('#ghost-body').innerHTML=`<div class="form-grid">${field('Date','date',g.date,'date',{required:true})}${select('Instrument','instrument',g.instrument,Object.keys(Core.POINT_VALUES))}${select('Direction','direction',g.direction,['Long','Short'])}${select('Category','category',g.category,['Valid · hesitation','Correctly rejected','Valid · unavailable','Noticed afterwards','Unclassified (legacy)'])}${select('Setup','setup',g.setup,[unknown,...setups()],{full:true})}${select('Candidate recorded','recordTiming',g.recordTiming,['Before outcome','After outcome','Unknown (legacy)'])}${select('Time zone','timezone',g.timezone||S.settings.timezone,['America/New_York','Europe/Zagreb','UTC'])}${field('Noticed at','noticedTime',g.noticedTime||'','datetime-local')}${field('Candidate expires at','expiresTime',g.expiresTime||'','datetime-local')}${field('Planned entry price','plannedEntry',g.plannedEntry,'number')}${field('Planned stop distance · pts','plannedStop',g.plannedStop,'number',{min:0})}${field('Planned target distance · pts','plannedTarget',g.plannedTarget,'number',{min:0})}${field('Estimated result · R','wouldR',g.wouldR,'number',{hint:'Leave blank until observed; this is a manual estimate.'})}${select('Regime','regime',g.regime,[unknown,'Trend','Chop','Unclear'])}${select('Session','session',g.session,sessions)}${select('Leader','leader',g.leader,[unknown,'SPY','QQQ'])}${select('Pair state','pairState',g.pairState,[unknown,'Confirmed','Above50','Below50'])}${select('Conviction','conviction',g.conviction,[unknown,'A+','B','C'])}${select('Skip reason','skipReason',g.skipReason,[unknown,'Waited for more confirmation',"Didn't trust the regime",'Fear after a loss','Missed the window (late)','Pair not confirmed','Size/risk fear','Other'])}${field('Why skipped / what did you observe?','reason',g.reason||'','textarea',{full:true})}${field('Result evidence / observation window','resultEvidence',g.resultEvidence||'','textarea',{full:true,placeholder:'Describe the entry, stop/target order, and when the candidate expired.'})}</div><div class="callout section-gap">A prospective candidate must be saved before adding its estimated outcome. Hindsight records remain separate. Original candidate plans and later changes are retained.</div>${g.originalCandidate?`<details><summary>Original candidate & ${g.revisions?.length||0} revisions</summary><pre class="prewrap">${e(JSON.stringify({original:g.originalCandidate,revisions:g.revisions},null,2))}</pre></details>`:''}${id?button('Move to deleted','delete-ghost',id,'danger'):''}`;
+  $('#ghost-editor').showModal();
+}
+async function saveGhost(ev){ev.preventDefault();try{const g={...ghostDraft,...Object.fromEntries(new FormData($('#ghost-form')))},old=S.ghostTrades.find(x=>x.id===g.id),now=new Date().toISOString();
+  if(!Core.validDate(g.date))throw Error('Enter a valid date.');for(const k of ['plannedEntry','plannedStop','plannedTarget','wouldR'])g[k]=n(g[k]);
+  if(g.plannedStop!==null&&g.plannedStop<=0)throw Error('Stop distance must be positive.');
+  if(g.plannedTarget!==null&&g.plannedTarget<0)throw Error('Target distance cannot be negative.');
+  g.noticedAt=g.noticedTime?Core.wallToISO(g.noticedTime,g.timezone):null;g.expiresAt=g.expiresTime?Core.wallToISO(g.expiresTime,g.timezone):null;
+  if(g.noticedAt&&g.expiresAt&&g.expiresAt<g.noticedAt)throw Error('Candidate expiry must follow the time it was noticed.');
+  if(g.category==='Noticed afterwards'&&g.recordTiming==='Before outcome')throw Error('A setup noticed afterwards must be labelled After outcome.');
+  if(g.recordTiming==='Before outcome'&&!old&&g.wouldR!==null)throw Error('Save the prospective candidate with no result first, or choose After outcome.');
+  if(old?.recordTiming!=='Before outcome'&&old&&g.recordTiming==='Before outcome')throw Error('A retrospective record cannot be relabelled as prospective.');
+  if(g.recordTiming==='Before outcome'&&!old&&g.expiresAt&&g.expiresAt<now)throw Error('This candidate already expired. Choose After outcome.');
+  g.createdAt=old?.createdAt||now;g.updatedAt=now;g.revisions=g.revisions||[];
+  if(!g.originalCandidate)g.originalCandidate={at:now,timing:g.recordTiming,values:Object.fromEntries(['date','setup','direction','instrument','category','plannedEntry','plannedStop','plannedTarget','noticedTime','expiresTime','reason','regime','conviction'].map(k=>[k,g[k]??null]))};
+  if(old)g.revisions.push({at:now,previous:Object.fromEntries(Object.keys(old).filter(k=>!['revisions','originalCandidate'].includes(k)).map(k=>[k,old[k]]))});
+  await mutate(old?'Edited skipped setup':'Added skipped setup',s=>{const i=s.ghostTrades.findIndex(x=>x.id===g.id);if(i<0)s.ghostTrades.push(g);else s.ghostTrades[i]=g;});ghostDirty=false;$('#ghost-editor').close();await render();toast('Skipped setup saved.');
+  }catch(err){$('#ghost-feedback').textContent=err.message;}}
+async function removeRecord(kind,id){
+  if(!confirm('Move this '+(kind==='trades'?'trade':'skipped setup')+' to Recently deleted? You can restore it in Data & settings.'))return;
+  await mutate('Moved record to deleted',s=>{const i=s[kind].findIndex(x=>x.id===id);if(i<0)return;s.trash.unshift({id:Core.uid(),kind,deletedAt:new Date().toISOString(),record:s[kind].splice(i,1)[0]});});
+  $('#detail').close();$('#ghost-editor').close();ghostDirty=false;await render();toast('Moved to Recently deleted.');
+}
+function download(content,name,type){const url=URL.createObjectURL(new Blob([content],{type})),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),15000);}
+async function backup(){await flushNotes();await queue;const bundle=await Store.bundle(S),at=new Date().toISOString();bundle.settings.lastBackup=at;download(JSON.stringify(bundle,null,2),'trades-backup-'+Core.dateInZone()+'.json','application/json');await mutate('Exported full JSON backup',s=>{s.settings.lastBackup=at;});toast('Full backup downloaded, including screenshots.');if(page==='data')await render();}
+function exportCSV(){
+  const headers=['date','instrument','direction','setup','strategy_version','account','status','entry_price','exit_price','quantity','fees','point_value','initial_stop_points','initial_risk_usd','gross_points','result_r','r_basis','net_usd','entry_time','exit_time','timezone','grade','regime','compliance','record_json'];
+  const rows=filtered().map(t=>{const m=Core.calculate(t);return [t.date,t.instrument,t.direction,t.setup,t.strategyVersion,t.account,t.status,m.entry,m.exit,m.qty,t.fees,t.pointValue,t.stopDist,t.initialRiskDollars,m.pnl,m.r,m.basis,m.net,t.entryAt,t.exitAt,t.timezone,t.grade,t.regime,Core.compliance(t),JSON.stringify({...t,images:[]})];});
+  download([headers,...rows].map(r=>r.map(Core.csvCell).join(',')).join('\r\n'),'trades-'+Core.dateInZone()+'.csv','text/csv;charset=utf-8');toast('Filtered trades exported. Use JSON for screenshots and daily notes.');
+}
+function monthlyCSV(){const groups=Core.group(filtered().filter(t=>t.status==='closed'),t=>t.date.slice(0,7)).sort((a,b)=>a.name.localeCompare(b.name));const headers=['month','trades','r_coverage','r_basis','total_r','expectancy_r','wins','losses','breakevens','win_rate_excl_be','avg_win_r','avg_loss_r','payoff_ratio','profit_factor_r','net_usd','net_dollar_coverage'];download([headers,...groups.map(g=>[g.name,g.n,g.nR,g.basis,g.totalR,g.expectancy,g.wins,g.losses,g.bes,g.winRate,g.avgW,g.avgL,g.payoff,g.pf,g.net,g.nCash])].map(r=>r.map(Core.csvCell).join(',')).join('\r\n'),'monthly-summary.csv','text/csv;charset=utf-8');}
+function markdownExport(){const s=Core.stats(filtered()),lines=['# Trading journal summary','',`Completed trades: ${s.n} · R coverage: ${s.nR}/${s.n} · Net-dollar coverage: ${s.nCash}/${s.n}`,`Total: ${rfmt(s.totalR)} · Expectancy: ${rfmt(s.expectancy)} · Basis: ${s.basis} · Net: ${money(s.net)}`,'','| Date | Instrument | Setup | Result | Net USD | Grade |','| --- | --- | --- | --- | --- | --- |',...filtered().map(t=>{const m=Core.calculate(t);return '| '+[t.date,t.instrument,t.setup,rfmt(m.r),money(m.net),t.grade||'—'].map(v=>String(v||'').replace(/\|/g,'\\|').replace(/\n/g,' ')).join(' | ')+' |';})];download(lines.join('\n'),'journal-summary.md','text/markdown;charset=utf-8');}
+async function weekExport(){await flushNotes();const rows=S.trades.filter(t=>t.date>=currentWeek&&t.date<=Core.addDays(currentWeek,6)),s=Core.stats(rows),notes=S.weeklyReviews[currentWeek]||{};download(['# Weekly review · '+currentWeek,'',`Trades: ${s.n} · R coverage: ${s.nR}/${s.n} · Net-dollar coverage: ${s.nCash}/${s.n}`,`Total ${rfmt(s.totalR)} · expectancy ${rfmt(s.expectancy)} · ${s.basis} · net ${money(s.net)}`,`Expectancy without best winner: ${rfmt(s.withoutBest)}`,'',...['pattern','strength','hypothesis','test'].flatMap(k=>['## '+({pattern:'What repeated',strength:'What went well',hypothesis:'Next hypothesis',test:'Test plan'}[k]),'',notes[k]||'Not recorded',''])].join('\n'),'weekly-review-'+currentWeek+'.md','text/markdown;charset=utf-8');}
+function previewImport(data,source='JSON backup'){
+  const incoming=Core.normalize(data),existingIds=new Set(S.trades.map(t=>t.id)),prints=new Set(S.trades.map(Core.fingerprint));let duplicates=0;const newTrades=[];
+  for(const t of incoming.trades){const key=Core.fingerprint(t);if(existingIds.has(t.id)||prints.has(key)){duplicates++;continue;}existingIds.add(t.id);prints.add(key);newTrades.push(t);}
+  const ghostIds=new Set(S.ghostTrades.map(g=>g.id)),newGhosts=[];for(const g of incoming.ghostTrades)if(!ghostIds.has(g.id)){ghostIds.add(g.id);newGhosts.push(g);}
+  pendingImport={incoming,newTrades,newGhosts,duplicates,source};
+  $('#import-title').textContent='Review '+source;$('#import-body').innerHTML=`<div class="stats-grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">${stat('Incoming trades',incoming.trades.length,source)}${stat('New on merge',newTrades.length,duplicates+' exact duplicate candidates skipped')}${stat('Skipped setups',incoming.ghostTrades.length,newGhosts.length+' new on merge')}</div><div class="callout">${source==='CSV'?'CSV has no daily notes or screenshots. ':''}Merge preserves existing records with matching IDs or exact trade fingerprints and keeps existing notes on overlapping days. Replace restores the full incoming journal. A recovery point is created before either action.</div>${duplicates?`<div class="callout warn">${duplicates} rows match an existing ID or exact trade fingerprint. Identical same-day trades without timestamps may be legitimate repeats. Check the source; add distinct timestamps or trade IDs if needed before merging.</div>`:''}${tradeTable(incoming.trades,6)}<div class="row section-gap">${button('Merge new records','confirm-import','merge','primary')}${source==='JSON backup'?button('Replace journal','confirm-import','replace','danger'):''}${button('Cancel','cancel-import')}</div><p class="hint section-gap">${Object.keys(incoming.dayNotes).length} daily notes · ${Object.keys(incoming.weeklyReviews).length} weekly reviews · ${Store.mediaRefs(incoming).length} referenced images. An existing record is never silently overwritten by merge.</p><div id="import-feedback" role="status"></div>`;
+  if(!$('#import-dialog').open)$('#import-dialog').showModal();
+}
+async function confirmImport(mode){
+  if(!pendingImport)return;if(mode==='replace'&&!confirm('Replace the current journal with this backup? The current state will be kept as an automatic recovery point.'))return;
+  const buttons=$$('#import-dialog button');buttons.forEach(b=>b.disabled=true);
+  try{const p=pendingImport,source=Core.clone(p.incoming),inc=await Store.unpack(source);
+    await mutate(mode==='replace'?'Replaced journal from backup':'Merged imported records',s=>{
+      if(mode==='replace'){const revision=s.revision;for(const k of Object.keys(s))delete s[k];Object.assign(s,inc,{revision});}
+      else{
+        const ids=new Set(p.newTrades.map(t=>t.id)),gids=new Set(p.newGhosts.map(g=>g.id));s.trades.push(...inc.trades.filter(t=>ids.has(t.id)));s.ghostTrades.push(...inc.ghostTrades.filter(g=>gids.has(g.id)));
+        for(const [k,v]of Object.entries(inc.dayNotes))if(!Object.hasOwn(s.dayNotes,k))s.dayNotes[k]=v;
+        for(const [k,v]of Object.entries(inc.weeklyReviews))if(!Object.hasOwn(s.weeklyReviews,k))s.weeklyReviews[k]=v;
+        for(const v of inc.strategyVersions)if(!s.strategyVersions.some(x=>x.id===v.id))s.strategyVersions.push(v);
+        for(const [k,v]of Object.entries(inc.playbookOverrides||{}))if(!Object.hasOwn(s.playbookOverrides,k))s.playbookOverrides[k]=v;
+        for(const item of inc.trash||[])if(!s.trash.some(x=>x.id===item.id))s.trash.push(item);
+      }
+    });pendingImport=null;$('#import-dialog').close();await render();toast('Import complete. Your previous state is recoverable in Data & settings.');
+  }catch(err){$('#import-feedback').textContent=err.message;}finally{buttons.forEach(b=>b.disabled=false);}
+}
+const CSV_FIELDS=[['date','Trading date',['date','trading date','trade date']],['instrument','Instrument',['instrument','symbol','contract']],['direction','Direction',['direction','side','long/short']],['entry','Entry price',['entry_price','entry price','entryprice','buy price']],['exit','Exit price',['exit_price','exit price','exitprice','sell price']],['quantity','Contracts',['quantity','qty','contracts','size']],['fees','Total fees',['fees','commissions','commission','total fees']],['stopDist','Initial stop (pts)',['initial_stop_points','stop distance','stopdist','stop']],['initialRiskDollars','Initial risk (USD)',['initial_risk_usd','initial risk','risk']],['pointValue','USD per point',['point_value','point value']],['setup','Setup',['setup']],['strategyVersion','Strategy version',['strategy_version','strategy version']],['account','Account',['account']],['entryTime','Entry time',['entry_time','entry time','entry timestamp']],['exitTime','Exit time',['exit_time','exit time','exit timestamp']],['externalId','Trade ID',['trade_id','trade id','id']]];
+function csvMapping(csv){
+  csvSource=csv;$('#import-title').textContent='Map completed-trade CSV';
+  $('#import-body').innerHTML=`<div class="callout">${csv.rows.length} rows. Each row must represent a complete round trip, not an individual order or fill. Dates must be YYYY-MM-DD; timestamps may be ISO with an offset, or YYYY-MM-DDTHH:mm in the selected zone. Use positive quantities and total USD fees. Blank fees remain unknown. Unrecognized instruments require a point value column.</div><div class="form-grid three">${CSV_FIELDS.map(([key,label,aliases])=>{const index=csv.headers.findIndex(h=>aliases.includes(h.trim().toLowerCase()));return select(label,'csv.'+key,index<0?'':index,[['','Not supplied'],...csv.headers.map((h,i)=>[i,h])]);}).join('')}${select('Timestamp time zone','csv.timezone',S.settings.timezone,['America/New_York','Europe/Zagreb','UTC'])}</div><div class="row section-gap">${button('Preview imported trades','csv-preview','','primary')}${button('Cancel','cancel-import')}</div><div id="import-feedback" class="section-gap" role="status"></div>`;if(!$('#import-dialog').open)$('#import-dialog').showModal();
+}
+function csvRecords(csv,mapping,timezone){
+  return csv.rows.map((row,i)=>{
+    const get=k=>mapping[k]===undefined||mapping[k]===''?'':(row[+mapping[k]]??'').trim();
+    const date=get('date');if(!Core.validDate(date))throw Error('Row '+(i+2)+': use a YYYY-MM-DD trading date.');
+    const symbol=get('instrument').toUpperCase(),instrument=Object.keys(Core.POINT_VALUES).sort((a,b)=>b.length-a.length).find(k=>new RegExp('^'+k+'(?:[FGHJKMNQUVXZ]\\d{1,4})?$').test(symbol))||symbol;
+    if(!instrument)throw Error('Row '+(i+2)+': instrument is required.');
+    const dir=get('direction').toLowerCase(),direction=['long','buy','b'].includes(dir)?'Long':['short','sell','s'].includes(dir)?'Short':null;
+    if(!direction)throw Error('Row '+(i+2)+': choose a Long/Short or Buy/Sell direction column.');
+    const entry=n(get('entry')),exit=n(get('exit')),qty=n(get('quantity')),pv=n(get('pointValue'))??Core.POINT_VALUES[instrument];
+    if(entry===null||exit===null)throw Error('Row '+(i+2)+': entry and exit prices are required.');
+    if(qty!==null&&(!Number.isInteger(qty)||qty<=0))throw Error('Row '+(i+2)+': contract quantity must be a positive integer.');
+    const normalizedTime=v=>{if(!v)return {time:'',at:null};if(/[zZ]$|[+-]\d\d:\d\d$/.test(v)){const d=new Date(v);if(!Number.isFinite(d.valueOf()))throw Error('Row '+(i+2)+': invalid timestamp.');return {time:Core.wallParts(d.valueOf(),timezone),at:d.toISOString()};}const wall=v.includes('T')?v:v.replace(' ','T');return {time:wall,at:Core.wallToISO(wall,timezone)};};
+    const et=normalizedTime(get('entryTime')),xt=normalizedTime(get('exitTime'));if(et.at&&xt.at&&xt.at<et.at)throw Error('Row '+(i+2)+': exit time precedes entry.');
+    const stop=n(get('stopDist')),risk=n(get('initialRiskDollars'))??(qty&&pv&&stop?qty*pv*stop:null),fees=n(get('fees'));
+    if(stop!==null&&stop<=0||risk!==null&&risk<=0||fees!==null&&fees<0)throw Error('Row '+(i+2)+': check stop, risk, or fees.');
+    if(qty!==null&&!(pv>0))throw Error('Row '+(i+2)+': point value is required for '+instrument+'.');
+    return Core.normalizeTrade({id:Core.uid(),date,instrument,direction,entry,exit,pnl:(exit-entry)*(direction==='Long'?1:-1),accountingMode:qty===null?'points':'fills',entries:qty===null?[]:[{qty,price:entry,...et}],exits:qty===null?[]:[{qty,price:exit,...xt}],fees,pointValue:pv,stopDist:stop,initialRiskDollars:risk,setup:get('setup'),strategyVersion:get('strategyVersion')||'Imported / unversioned',account:get('account'),timezone,entryTime:et.time,exitTime:xt.time,entryAt:et.at,exitAt:xt.at,status:'closed',externalId:get('externalId'),importSource:'completed-trade-csv',createdAt:new Date().toISOString(),planTiming:'Reconstructed after entry',excursionScope:'Unknown (legacy)',importRow:Object.fromEntries(csv.headers.map((h,k)=>[h,row[k]??'']))});
+  });
+}
+
+async function action(name,id,el){
+  switch(name){
+    case 'page':return goPage(id);
+    case 'new-trade':return openTrade();
+    case 'detail':return openDetail(id);
+    case 'edit-trade':$('#detail').close();return openTrade(id);
+    case 'review-trade':$('#detail').close();return openTrade(id,'review');
+    case 'delete-trade':return removeRecord('trades',id);
+    case 'new-ghost':return openGhost();
+    case 'edit-ghost':return openGhost(id);
+    case 'delete-ghost':return removeRecord('ghostTrades',id);
+    case 'edit-tab':captureDraft();editTab=id;renderEditor();return;
+    case 'add-context':captureDraft();draft.context.push({});draftDirty=true;renderEditor();return;
+    case 'remove-context':captureDraft();draft.context.splice(+id,1);draftDirty=true;renderEditor();return;
+    case 'context-preset':captureDraft();draft.context.push({timeframe:'30m',underlying:'SPY',optionSide:'Call',cross:'Positive',position:'At',slope:'Up',interaction:'Bounce'});draft.trigger='Put 50 reject';draft.signalUnderlying='SPY';draft.signalSide='Put';draft.signalTimeframe='5m';draftDirty=true;renderEditor();return;
+    case 'add-fill':captureDraft();draft[id].push({qty:'',price:'',time:''});draftDirty=true;renderEditor();return;
+    case 'remove-fill':captureDraft();{const [side,i]=id.split('.');draft[side].splice(+i,1);}draftDirty=true;renderEditor();return;
+    case 'estimate-risk':{
+      captureDraft();const qty=draft.entries.reduce((s,f)=>s+(n(f.qty)||0),0),risk=qty*(n(draft.stopDist)||0)*(n(draft.pointValue)||0);
+      if(!(risk>0)){toast('Enter contracts and point value on Execution, plus the original stop distance on Plan.');return;}
+      if(draft.originalPlan&&n(draft.initialRiskDollars)!==risk&&!confirm('Recalculate the initial risk? This changes R and will be recorded as a plan revision.'))return;
+      draft.initialRiskDollars=Number(risk.toFixed(6));draftDirty=true;renderEditor();return;
+    }
+    case 'trade-image':$('#trade-image-file').click();return;
+    case 'remove-image':captureDraft();draft.images.splice(+id,1);draftDirty=true;renderEditor();return;
+    case 'zoom':{const url=await Store.mediaURL(id);if(!url){toast('Screenshot unavailable. Reimport the full JSON backup.');return;}$('#lightbox-image').src=url;$('#lightbox').showModal();return;}
+    case 'curve':curveMode=id;return render();
+    case 'this-month':{const d=Core.dateInZone(new Date(),S.settings.timezone);filters.from=d.slice(0,7)+'-01';filters.to=d;return render();}
+    case 'reset-filters':Object.keys(filters).forEach(k=>filters[k]='');return render();
+    case 'playbook-phase':playbookPhase=id;return render();
+    case 'save-playbook':{const input=$$('[name^="playbook."]').find(x=>x.name==='playbook.'+id),value=input.value;await mutate('Updated playbook clarification',s=>{s.playbookOverrides[id]=value;});toast('Clarification saved.');return;}
+    case 'week-prev':await flushNotes();currentWeek=Core.addDays(currentWeek,-7);return render();
+    case 'week-next':await flushNotes();currentWeek=Core.addDays(currentWeek,7);return render();
+    case 'save-week':weekDirty=true;await flushNotes();toast('Weekly review saved.');return;
+    case 'export-week':return weekExport();
+    case 'journal-day':await flushNotes();journalDate=id;return render();
+    case 'journal-today':await flushNotes();journalDate=Core.dateInZone(new Date(),S.settings.timezone);calendarMonth=journalDate.slice(0,7);return render();
+    case 'month-prev':case 'month-next':{await flushNotes();const d=new Date(calendarMonth+'-15T12:00:00Z');d.setUTCMonth(d.getUTCMonth()+(name==='month-next'?1:-1));calendarMonth=d.toISOString().slice(0,7);return render();}
+    case 'save-note':noteDirty=true;await flushNotes();toast('Daily note saved.');return;
+    case 'note-image':$('#note-file').click();return;
+    case 'clear-note':if(confirm('Clear this day’s note? The previous text remains in automatic recovery points.')){$('#note-editor').innerHTML='';noteDirty=true;await flushNotes();}return;
+    case 'backup':return backup();
+    case 'export-csv':return exportCSV();
+    case 'export-monthly':return monthlyCSV();
+    case 'export-markdown':return markdownExport();
+    case 'import-json':await flushNotes();$('#json-file').value='';$('#json-file').click();return;
+    case 'import-csv':await flushNotes();$('#csv-file').value='';$('#csv-file').click();return;
+    case 'confirm-import':return confirmImport(id);
+    case 'cancel-import':pendingImport=null;csvSource=null;$('#import-dialog').close();return;
+    case 'csv-preview':{
+      try{const mapping={};for(const input of $$('[name^="csv."]'))mapping[input.name.slice(4)]=input.value;previewImport({trades:csvRecords(csvSource,mapping,mapping.timezone)},'CSV');}catch(err){$('#import-feedback').textContent=err.message;}return;
+    }
+    case 'csv-template':download('trade_id,date,instrument,direction,entry_price,exit_price,quantity,fees,initial_stop_points,initial_risk_usd,entry_time,exit_time,setup,strategy_version,account\r\nexample-001,2026-10-01,MES,Long,5800,5810,2,2.40,5,50,2026-10-01T09:35,2026-10-01T10:05,BUL-1,v1,Example account\r\n','completed-trade-template.csv','text/csv;charset=utf-8');return;
+    case 'save-settings':{
+      const timezone=$('[name="settings.timezone"]').value,defaultVersion=$('[name="settings.defaultVersion"]').value;await mutate('Updated defaults',s=>Object.assign(s.settings,{timezone,defaultVersion}));toast('Defaults saved.');return;
+    }
+    case 'new-version':{
+      const version=$('[name="newVersion.id"]').value.trim(),label=$('[name="newVersion.name"]').value.trim(),notes=$('[name="newVersion.notes"]').value;
+      if(!version||!label){toast('Give the version an ID and a name.');return;}if(S.strategyVersions.some(v=>v.id===version)){toast('That version ID already exists. Choose a new ID.');return;}
+      await mutate('Created strategy version',s=>{s.strategyVersions.push({id:version,name:label,notes,createdAt:new Date().toISOString()});s.settings.defaultVersion=version;});await render();toast('Version created and set as the default for new trades.');return;
+    }
+    case 'restore-snapshot':{
+      const snap=await Store.snapshot(id);if(!snap)return;if(!confirm('Restore the journal to this recovery point? Your current state will also be kept.'))return;
+      await mutate('Restored recovery point',s=>{const revision=s.revision;for(const k of Object.keys(s))delete s[k];Object.assign(s,Core.normalize(snap.state),{revision});});await render();toast('Recovery point restored.');return;
+    }
+    case 'restore-trash':{
+      await mutate('Restored deleted record',s=>{const i=s.trash.findIndex(x=>x.id===id);if(i<0)return;const item=s.trash[i];if(s[item.kind].some(t=>t.id===item.record.id))throw Error('A record with this ID already exists.');s[item.kind].push(item.record);s.trash.splice(i,1);});await render();toast('Record restored.');return;
+    }
+  }
+}
+function closeDialog(id){
+  if(id==='editor'&&draftDirty&&!confirm('Discard unsaved trade edits?'))return;
+  if(id==='ghost-editor'&&ghostDirty&&!confirm('Discard unsaved skipped-setup edits?'))return;
+  $('#'+id).close();if(id==='editor'){draftDirty=false;draft=null;}if(id==='ghost-editor')ghostDirty=false;
+}
+document.addEventListener('click',async ev=>{
+  const close=ev.target.closest('[data-close]');if(close){ev.preventDefault();closeDialog(close.dataset.close);return;}
+  const nav=ev.target.closest('[data-page]');if(nav){try{await goPage(nav.dataset.page);}catch(err){toast(err.message);}return;}
+  const el=ev.target.closest('[data-action]');if(!el)return;ev.preventDefault();try{await action(el.dataset.action,el.dataset.id,el);}catch(err){toast(err.message);}
+});
+document.addEventListener('change',async ev=>{
+  const el=ev.target;try{
+    if(el.name?.startsWith('filter.')){filters[el.name.slice(7)]=el.value;await render();return;}
+    if(el.name==='groupDimension'){groupDimension=el.value;await render();return;}
+    if(el.name==='weekDate'&&Core.validDate(el.value)){await flushNotes();currentWeek=Core.monday(el.value);await render();return;}
+    if(el.closest('#trade-form')){
+      draftDirty=true;captureDraft();if(el.dataset.imageIndex!==undefined)draft.images[+el.dataset.imageIndex].label=el.value;
+      if(el.name==='status'&&!draft.originalPlan){draft.planTiming=el.value==='planned'?'Before entry':'Reconstructed after entry';renderEditor();}
+      else if(el.name==='gateRegime'||el.name==='accountingMode'){if(el.name==='accountingMode'&&draft.accountingMode==='fills'&&!draft.entries.length){draft.entries=[{qty:'',price:draft.entry??'',time:draft.entryTime||''}];draft.exits=[{qty:'',price:draft.exit??'',time:draft.exitTime||''}];draft.pointValue=Core.POINT_VALUES[draft.instrument]||null;}renderEditor();}
+      else if(el.name==='instrument'){draft.pointValue=Core.POINT_VALUES[draft.instrument]||null;renderEditor();}
+      else if($('#execution-preview'))$('#execution-preview').innerHTML=executionPreview();
+    }
+    if(el.id==='trade-image-file'){await addTradeImages([...el.files]);return;}
+    if(el.id==='note-file'){await addNoteImages([...el.files]);return;}
+    if(el.id==='json-file'&&el.files[0]){if(el.files[0].size>150*1024*1024)throw Error('Choose a backup smaller than 150 MB.');previewImport(JSON.parse(await el.files[0].text()));}
+    if(el.id==='csv-file'&&el.files[0]){
+      const csv=Core.parseCSV(await el.files[0].text()),recordCol=csv.headers.indexOf('record_json');
+      if(recordCol>=0){const records=csv.rows.map((row,i)=>{try{return JSON.parse(row[recordCol]);}catch{throw Error('Invalid embedded record on CSV row '+(i+2));}});previewImport({trades:records},'CSV');}else csvMapping(csv);
+    }
+  }catch(err){toast(err.message);}
+});
+document.addEventListener('input',ev=>{
+  const el=ev.target;
+  if(el.closest('#trade-form')){draftDirty=true;captureDraft();if($('#execution-preview'))$('#execution-preview').innerHTML=executionPreview();}
+  if(el.closest('#ghost-form'))ghostDirty=true;
+  if(el.name?.startsWith('week.')){weekDirty=true;weekGeneration++;clearTimeout(weekTimer);weekTimer=setTimeout(()=>flushNotes().catch(err=>toast(err.message)),1000);}
+  if(el.closest('#note-editor')){noteDirty=true;noteGeneration++;$('#note-save-state').textContent='Saving…';clearTimeout(noteTimer);noteTimer=setTimeout(()=>flushNotes().catch(err=>toast(err.message)),1000);}
+});
+document.addEventListener('paste',async ev=>{
+  const images=[...(ev.clipboardData?.items||[])].filter(x=>x.type.startsWith('image/')).map(x=>x.getAsFile()).filter(Boolean);
+  try{
+    if(ev.target.closest('#note-editor')){
+      ev.preventDefault();if(images.length){await addNoteImages(images);return;}
+      const text=ev.clipboardData?.getData('text/plain')||'';const selection=window.getSelection();if(selection?.rangeCount){const range=selection.getRangeAt(0);range.deleteContents();const node=document.createTextNode(text);range.insertNode(node);range.setStartAfter(node);range.collapse(true);selection.removeAllRanges();selection.addRange(range);}else $('#note-editor').append(document.createTextNode(text));noteDirty=true;noteGeneration++;clearTimeout(noteTimer);noteTimer=setTimeout(()=>flushNotes().catch(err=>toast(err.message)),1000);
+    }else if($('#editor').open&&images.length){ev.preventDefault();await addTradeImages(images);}
+  }catch(err){toast(err.message);}
+});
+document.addEventListener('dragover',ev=>{if(ev.target.closest('#trade-drop')||ev.target.closest('#note-editor'))ev.preventDefault();});
+document.addEventListener('drop',async ev=>{const note=ev.target.closest('#note-editor'),trade=ev.target.closest('#trade-drop');if(!note&&!trade)return;ev.preventDefault();try{const files=[...ev.dataTransfer.files];if(note)await addNoteImages(files);else await addTradeImages(files);}catch(err){toast(err.message);}});
+$('#trade-form').addEventListener('submit',saveTrade);$('#ghost-form').addEventListener('submit',saveGhost);
+for(const d of $$('dialog'))d.addEventListener('cancel',ev=>{ev.preventDefault();closeDialog(d.id);});
+$('#new-trade').addEventListener('click',()=>ready&&openTrade());
+$('#backup-button').addEventListener('click',()=>ready&&backup().catch(err=>toast(err.message)));
+$('#theme-button').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;try{localStorage.setItem('journal-v4-theme',theme);}catch{}});
+window.addEventListener('beforeunload',ev=>{if(draftDirty||ghostDirty||noteDirty||weekDirty){ev.preventDefault();ev.returnValue='';}});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flushNotes().catch(()=>{});});
+async function boot(){
+  try{
+    try{const theme=localStorage.getItem('journal-v4-theme');if(theme)document.documentElement.dataset.theme=theme;}catch{}
+    $('#nav').insertAdjacentHTML('beforeend','<button data-page="data" class="data-nav-mobile"><span>↳</span> Data & settings</button>');
+    const loaded=await Store.initial();S=loaded.state;ready=true;setStatus('All changes saved');journalDate=Core.dateInZone(new Date(),S.settings.timezone);calendarMonth=journalDate.slice(0,7);currentWeek=Core.monday(journalDate);await render();
+    if(loaded.migrated)toast('Your older browser journal was imported. Export a new full backup to keep a portable copy.');
+  }catch(err){setStatus('Could not open storage');$('#main').innerHTML=`<div class="card"><h2>Journal could not open</h2><p class="subtext">${e(err.message)}</p><div class="callout section-gap">Use a normal Chrome, Edge, Firefox, or Safari window with browser storage enabled. Existing records have not been overwritten. If an older browser record is damaged, export a valid backup from your old journal and open this file in a fresh browser profile.</div>${button('Reload','reload','','primary')}</div>`;document.querySelector('[data-action="reload"]')?.addEventListener('click',()=>location.reload());}
+}
+window.JournalApp={Core,Store,getState:()=>Core.clone(S),getFilters:()=>({...filters}),calculate:Core.calculate,render,goPage,previewImport,csvRecords,ready:()=>ready};
+boot();
+</script>
+</body>
+</html>
